@@ -20,7 +20,7 @@
    <children>
       <VBox prefHeight="602.0" prefWidth="243.0" style="-fx-background-color: #3F2863;">
          <children>
-            <Pane prefHeight="138.0" prefWidth="243.0">
+            <Pane prefHeight="138.0" prefWidth="243.0" >
                <children>
                   <Label layoutX="77.0" layoutY="58.0" text="WhatWebFX" textFill="WHITE">
                      <font>
@@ -65,7 +65,7 @@
             </Button>
          </children>
       </VBox>
-      <Pane layoutX="243.0" layoutY="-2.0" prefHeight="188.0" prefWidth="798.0" />
+      <Pane layoutX="243.0" layoutY="-2.0" prefHeight="188.0" prefWidth="798.0" style="-fx-background-color: white"/>
       <StackPane layoutX="243.0" layoutY="176.0" prefHeight="426.0" prefWidth="798.0">
          <children>
 <!--            Hemen agertzen dira inportatutako beste FXML-ak -->
@@ -111,6 +111,6 @@
             </AnchorPane>
          </children>
       </StackPane>
-      <FontAwesomeIconView fx:id="btnClose" glyphName="TIMES" layoutX="1024.0" layoutY="21.0" onMouseClicked="#handleClose" size="20" />
+      <FontAwesomeIconView fx:id="btnClose" glyphName="TIMES" layoutX="1010.0" layoutY="30.0" onMouseClicked="#handleClose" size="25" />
    </children>
 </AnchorPane>
