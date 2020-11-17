@@ -12,12 +12,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="620.0" prefWidth="996.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.MainKud">
+<AnchorPane prefHeight="511.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.MainKud">
    <children>
-      <VBox prefHeight="620.0" prefWidth="243.0" style="-fx-background-color: #3F2863;" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="602.0" prefWidth="243.0" style="-fx-background-color: #3F2863;">
          <children>
             <Pane prefHeight="138.0" prefWidth="243.0">
                <children>
@@ -29,7 +30,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="41.0" layoutY="80.0" size="30" />
                </children>
             </Pane>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="CMS" textFill="WHITE">
+            <Button fx:id="cms_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="CMS" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" size="20" />
                </graphic>
@@ -40,7 +41,7 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="Server" textFill="WHITE">
+            <Button fx:id="zerbitzari_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="Server" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" size="20" />
                </graphic>
@@ -51,7 +52,7 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="WhatWeb" textFill="WHITE">
+            <Button fx:id="whatWeb_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@fullpackstyling.css" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="COG" size="20" />
                </graphic>
@@ -64,38 +65,52 @@
             </Button>
          </children>
       </VBox>
-      <VBox layoutX="258.0" layoutY="171.0" prefHeight="434.0" prefWidth="788.0">
+      <Pane layoutX="243.0" layoutY="-2.0" prefHeight="188.0" prefWidth="798.0" />
+      <StackPane layoutX="243.0" layoutY="176.0" prefHeight="426.0" prefWidth="798.0">
          <children>
-            <GridPane prefHeight="434.0" prefWidth="790.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="208.60001220703126" minHeight="10.0" prefHeight="64.60001220703126" vgrow="SOMETIMES" />
-                <RowConstraints maxHeight="379.79999389648435" minHeight="10.0" prefHeight="378.1999877929687" vgrow="SOMETIMES" />
-              </rowConstraints>
+<!--            Hemen agertzen dira inportatutako beste FXML-ak -->
+            <AnchorPane fx:id="WhatWeb" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: white;">
+               <fx:include source="WhatWeb.fxml"/>
+            </AnchorPane>
+            <AnchorPane fx:id="zerbitzariak" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: White;">
+               <fx:include source="Zerbitzariak.fxml"/>
+            </AnchorPane>
+<!--           ////////////////////////////////////////////////-->
+            <AnchorPane fx:id="cms" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: White;">
                <children>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                  <VBox layoutX="20.0" prefHeight="423.0" prefWidth="761.0">
                      <children>
-                        <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="34.0" prefWidth="183.0" stylesheets="@fullpackstyling.css" text="EXEKUTATU" textFill="WHITE" HBox.hgrow="ALWAYS">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="PLAY" />
-                           </graphic>
-                           <font>
-                              <Font name="Arial Rounded MT Bold" size="17.0" />
-                           </font>
-                        </Button>
-                        <TextField fx:id="urlArea" prefHeight="35.0" prefWidth="598.0" HBox.hgrow="ALWAYS" />
+                        <GridPane prefHeight="434.0" prefWidth="790.0">
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="208.60001220703126" minHeight="10.0" prefHeight="64.60001220703126" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="379.79999389648435" minHeight="10.0" prefHeight="378.1999877929687" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                           <children>
+                              <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                                 <children>
+                                    <Button graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="34.0" prefWidth="183.0" stylesheets="@fullpackstyling.css" text="EXEKUTATU" textFill="WHITE" HBox.hgrow="ALWAYS">
+                                       <graphic>
+                                          <FontAwesomeIconView fill="WHITE" glyphName="PLAY" />
+                                       </graphic>
+                                       <font>
+                                          <Font name="Arial Rounded MT Bold" size="17.0" />
+                                       </font>
+                                    </Button>
+                                    <TextField fx:id="urlArea" prefHeight="35.0" prefWidth="598.0" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <TextArea fx:id="txtArea" prefHeight="362.0" prefWidth="750.0" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
                      </children>
-                  </HBox>
-                  <TextArea fx:id="txtArea" prefHeight="362.0" prefWidth="750.0" GridPane.rowIndex="1" />
+                  </VBox>
                </children>
-            </GridPane>
+            </AnchorPane>
          </children>
-      </VBox>
-      <Pane layoutX="242.0" prefHeight="163.0" prefWidth="819.0" stylesheets="@fullpackstyling.css">
-         <children>
-            <FontAwesomeIconView fx:id="btnClose" glyphName="TIMES" layoutX="797.0" layoutY="21.0" onMouseClicked="#handleClose" size="20" />
-         </children></Pane>
+      </StackPane>
+      <FontAwesomeIconView fx:id="btnClose" glyphName="TIMES" layoutX="1024.0" layoutY="21.0" onMouseClicked="#handleClose" size="20" />
    </children>
 </AnchorPane>
