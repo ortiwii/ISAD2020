@@ -10,11 +10,11 @@
 
 <AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.whatWebKud">
    <children>
-      <TabPane prefHeight="420.0" prefWidth="798.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane prefHeight="420.0" prefWidth="798.0" stylesheets="@tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="WhatWeb">
+          <Tab closable="false" text="WhatWeb">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="782.0" style="-fx-background-color: White;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="782.0">
                      <children>
                         <TextField fx:id="url_txt_1" layoutX="239.0" layoutY="39.0" prefHeight="26.0" prefWidth="319.0" />
                         <TextArea fx:id="log_txt_1" layoutX="239.0" layoutY="86.0" prefHeight="200.0" prefWidth="318.0" wrapText="true" />
@@ -25,9 +25,9 @@
                   </AnchorPane>
             </content>
           </Tab>
-          <Tab text="MongooDB">
+          <Tab closable="false" text="MongooDB">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: White;">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                       <TextField fx:id="url_txt_2" layoutX="239.0" layoutY="39.0" prefHeight="26.0" prefWidth="319.0" />
                       <TextArea fx:id="log_txt_2" layoutX="239.0" layoutY="86.0" prefHeight="200.0" prefWidth="318.0" wrapText="true" />
