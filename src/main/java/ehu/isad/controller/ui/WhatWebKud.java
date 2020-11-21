@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class whatWebKud implements Initializable {
+public class WhatWebKud implements Initializable {
 
     @FXML
     private TextField url_txt_1;

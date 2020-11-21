@@ -8,7 +8,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.whatWebKud">
+<AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.WhatWebKud">
    <children>
       <TabPane prefHeight="420.0" prefWidth="798.0" stylesheets="@tab.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
