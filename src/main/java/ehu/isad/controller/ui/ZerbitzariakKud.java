@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class zerbitzariakKud implements Initializable {
+public class ZerbitzariakKud implements Initializable {
     @FXML
     private ListView<?> web_zerrenda;
 
