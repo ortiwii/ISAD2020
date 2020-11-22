@@ -1,22 +1,45 @@
 package ehu.isad.controller.ui;
 
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import ehu.isad.controller.db.WhatWebDBKud;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+public class ZerbitzariakKud {
 
-public class ZerbitzariakKud implements Initializable {
     @FXML
-    private ListView<?> web_zerrenda;
+    private ResourceBundle resources;
+
+    @FXML
+    private URL location;
+
+    @FXML
+    private ListView<String> web_zerrenda;
 
     @FXML
     private Button eguneratu_button;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    private ObservableList<String> targets = FXCollections.observableArrayList();
 
+    @FXML
+    void OnClick(ActionEvent event) {
+        this.eguneratu();
+    }
+
+    @FXML
+    void initialize() {
+        this.eguneratu();
+    }
+    private void eguneratu(){
+        List<String> list = WhatWebDBKud.getInstance().getBilaketak();
+        targets.setAll(list);
+        web_zerrenda.setItems(targets);
     }
 }
