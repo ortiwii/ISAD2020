@@ -18,6 +18,6 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="eguneratu_button" layoutX="301.0" layoutY="334.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="194.0" text="Eguneratu" />
+      <Button fx:id="eguneratu_button" layoutX="332.0" layoutY="343.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="36.0" prefWidth="134.0" text="Eguneratu" />
    </children>
 </AnchorPane>

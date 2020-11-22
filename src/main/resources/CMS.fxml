@@ -35,7 +35,7 @@
                               <Font name="Arial Rounded MT Bold" size="17.0" />
                            </font>
                         </Button>
-                        <TextField fx:id="urlArea" prefHeight="35.0" prefWidth="598.0" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="urlArea" onKeyPressed="#keyPressed" prefHeight="35.0" prefWidth="598.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <TextArea fx:id="txtArea" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="345.0" prefWidth="760.0" GridPane.rowIndex="1" />
