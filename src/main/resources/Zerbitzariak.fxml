@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.zerbitzariakKud">
+<AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.ZerbitzariakKud">
    <children>
       <ListView fx:id="web_zerrenda" layoutX="258.0" layoutY="43.0" prefHeight="278.0" prefWidth="281.0" />
       <Label layoutX="258.0" layoutY="9.0" prefHeight="18.0" prefWidth="282.0" text="Eskaneatutako WebGuneak:">
@@ -18,6 +18,6 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="eguneratu_button" layoutX="301.0" layoutY="334.0" mnemonicParsing="false" prefHeight="55.0" prefWidth="194.0" text="Eguneratu" />
+      <Button fx:id="eguneratu_button" layoutX="332.0" layoutY="343.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="36.0" prefWidth="134.0" text="Eguneratu" />
    </children>
 </AnchorPane>
