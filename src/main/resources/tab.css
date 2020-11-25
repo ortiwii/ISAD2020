@@ -32,10 +32,6 @@
     -fx-cursor: hand;
 }
 
-#lehenengoa:selected{
-    -fx-background-color: #9370db;
-}
-
 #lehenengoa:focused{
     -fx-background-color: #9370db;
 }
