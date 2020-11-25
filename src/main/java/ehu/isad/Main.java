@@ -48,6 +48,7 @@ public class Main extends Application {
 
     stage.setTitle("WhatWEB");
     stage.setScene(mainScene);
+    mainKud.hasieraketak_egin();
     stage.show();
   }
   public void close (){
@@ -59,7 +60,9 @@ public class Main extends Application {
     mainUI = (Parent) loaderMain.load();
     mainKud = loaderMain.getController();
     mainScene = new Scene(mainUI);
+
     mainKud.setMainApp(this);
+
   }
 
 
