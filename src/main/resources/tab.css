@@ -23,15 +23,27 @@
 /* Botoien estiloak*/
 .button
 {
-    -fx-background-color : #3F2B63;
+    -fx-background-color : #3f2863;
     -fx-text-fill: #FFFFFF;
     -fx-font-weight: bold;
 }
-.button:hover
-{
-    -fx-background-color : #2A1C42 ;
+.button:hover{
+    -fx-background-color : #442d6b;
+    -fx-cursor: hand;
 }
-.button:pressed
-{
-    -fx-background-color : #7156DD ;
+
+#lehenengoa:selected{
+    -fx-background-color: #9370db;
 }
+
+#lehenengoa:focused{
+    -fx-background-color: #9370db;
+}
+
+#bigarrena:focused{
+    -fx-background-color : #9c9c9c;
+}
+#hirugarrena:focused{
+    -fx-background-color : #fffb2c;
+}
+
