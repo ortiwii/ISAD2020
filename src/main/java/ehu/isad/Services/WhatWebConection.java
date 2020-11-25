@@ -17,31 +17,18 @@ public class WhatWebConection {
     public static WhatWebConection getInstance(){
         return instantzia;
     }
+
     public List<String> allProcesses(String url) {
         List<String> processes = new LinkedList<String>();
         if (!url.equals("") ) {
-            try {
-                Properties properties = null;
-                InputStream in = null;
-
-                in = this.getClass().getResourceAsStream("/setup.properties");
-                properties = new Properties();
-                properties.load(in);
-                String root = System.getProperty("user.dir");
-                String tmp = properties.getProperty("pathToInsert");
-                String path = root+tmp;
-
+            try{
                 String line;
                 Process p = null;
                 if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                    path = path.replace("\\","/" );
-                    path = path.replace("D:", "/mnt/d");
-                    path = path.replace(" ", "\\ ");
                     p = Runtime.getRuntime().exec
-                            (System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --log-sql="+path+" "+url);
+                            (System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --log-sql=/tmp/insert.sql "+url);
                 } else {
-                    path = path.replace(" ", "\\ ");
-                    p = Runtime.getRuntime().exec("whatweb --colour=never --log-sql="+path+" "+url);
+                    p = Runtime.getRuntime().exec("whatweb --colour=never --log-sql=/tmp/insert.sql "+url);
                 }
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -49,8 +36,8 @@ public class WhatWebConection {
                     processes.add(line);
                 }
                 input.close();
-            } catch (Exception err) {
-                err.printStackTrace();
+            }catch (IOException e){
+                e.printStackTrace();
             }
         }
         return processes;

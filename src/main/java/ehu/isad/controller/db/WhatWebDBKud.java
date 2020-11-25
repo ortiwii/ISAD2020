@@ -1,6 +1,8 @@
 package ehu.isad.controller.db;
 
 
+import ehu.isad.Services.Services;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,18 +23,9 @@ public class WhatWebDBKud {
     }
 
     public void txertatu(String url){
-        Properties properties = null;
         InputStream in = null;
-
         try {
-            in = this.getClass().getResourceAsStream("/setup.properties");
-            properties = new Properties();
-            properties.load(in);
-
-            String tmp = properties.getProperty("pathToInsert");
-            String root = System.getProperty("user.dir");
-            String path = root+tmp;
-            System.out.println(path);
+            String path = Services.getInstance().getPathToInsert();
             File insert = new File(path);
 
             Scanner sc = new Scanner(insert);
