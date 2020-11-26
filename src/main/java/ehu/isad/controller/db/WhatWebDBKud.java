@@ -2,6 +2,7 @@ package ehu.isad.controller.db;
 
 
 import ehu.isad.Services.Services;
+import ehu.isad.Services.SystemConection;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,21 +24,22 @@ public class WhatWebDBKud {
     }
 
     public void txertatu(String url){
-        InputStream in = null;
-        try {
-            String path = Services.getInstance().getPathToInsert();
-            File insert = new File(path);
+        if (!WhatWebDBKud.getInstance().bilatutaDago(url)){
+            InputStream in = null;
+            try {
+                String path = Services.getInstance().getPathToInsert();
+                File insert = new File(path);
 
-            Scanner sc = new Scanner(insert);
-            while (sc.hasNextLine()){
-                String line = sc.nextLine();
-                line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
-                DBKudeatzaile.getInstantzia().execSQL(line);
+                Scanner sc = new Scanner(insert);
+                while (sc.hasNextLine()){
+                    String line = sc.nextLine();
+                    line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
+                    DBKudeatzaile.getInstantzia().execSQL(line);
+                }
+                SystemConection.getInstance().deleteFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            insert.delete();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     public boolean bilatutaDago (String url){

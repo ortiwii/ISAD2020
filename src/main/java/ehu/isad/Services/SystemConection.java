@@ -2,23 +2,21 @@ package ehu.isad.Services;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Properties;
 
-public class WhatWebConection {
+public class SystemConection {
 
-    private static WhatWebConection instantzia = new WhatWebConection();
+    private static SystemConection instantzia = new SystemConection();
 
-    private WhatWebConection (){ }
+    private SystemConection(){ }
 
-    public static WhatWebConection getInstance(){
+    public static SystemConection getInstance(){
         return instantzia;
     }
 
-    public List<String> allProcesses(String url) {
+    public List<String> execWhatWeb(String url) {
         List<String> processes = new LinkedList<String>();
         if (!url.equals("") ) {
             try{
@@ -42,6 +40,17 @@ public class WhatWebConection {
         }
         return processes;
     }
-
+    public void deleteFile () {
+        try {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                Runtime.getRuntime().exec
+                        (System.getenv("windir") + "\\system32\\" + "wsl rm -r " +"/tmp/insert.sql");
+            } else {
+                Runtime.getRuntime().exec("rm -r " +"/tmp/insert.sql");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
