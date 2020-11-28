@@ -8,6 +8,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.control.*;
 import javafx.scene.effect.Blend;
 import javafx.scene.effect.BlendMode;
@@ -99,12 +100,9 @@ public class MainKud implements Initializable {
   @FXML
   void handleClose(MouseEvent event) {
     System.exit(0);
-
   }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
   }
-
-
 }
