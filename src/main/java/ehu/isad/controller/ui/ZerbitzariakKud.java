@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import ehu.isad.Main;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,10 @@ public class ZerbitzariakKud {
     private Button eguneratu_button;
 
     private ObservableList<String> targets = FXCollections.observableArrayList();
+
+    public ZerbitzariakKud(Main main) {
+        System.out.println("ZerbitzariakKud instantziatu da.");
+    }
 
     @FXML
     void OnClick(ActionEvent event) {

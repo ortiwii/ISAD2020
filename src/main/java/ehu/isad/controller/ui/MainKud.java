@@ -2,32 +2,41 @@ package ehu.isad.controller.ui;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import ehu.isad.Main;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
+import javafx.scene.effect.Blend;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class MainKud implements Initializable {
 
-  private Main mainApp;
+  private Main mainApp=null;
+
+  public MainKud(Main main){
+    System.out.println("MainKud instantziatu da.");
+  }
   @FXML
-  private AnchorPane cms;
+  private AnchorPane Cms;
   @FXML
   private Button cms_button;
+
+  @FXML
+  private Pane izen_panela;
+
+  @FXML
+  private Label azpititulua;
+
+  @FXML
+  private Label titulua;
 
   @FXML
   private Button zerbitzari_button;
@@ -35,49 +44,74 @@ public class MainKud implements Initializable {
   @FXML
   private Button whatWeb_button;
   @FXML
-  private AnchorPane zerbitzariak;
+  private AnchorPane Zerbitzariak;
 
   @FXML
   private AnchorPane WhatWeb;
   @FXML
   private FontAwesomeIconView btnClose;
 
-  public void setMainApp(Main main) {
-    this.mainApp = mainApp;
-  }
 
-//  @FXML
-//  public void onClick(ActionEvent actionEvent) {
-//
-//
+
+  @FXML
+  private CMSKud cmsController;
+
+  @FXML
+  private WhatWebKud whatwebController;
+
+  @FXML
+  private ZerbitzariakKud zerbitzariakController;
+
+
+
+
+//  public void setMainApp(Main main) {
+//    this.mainApp = mainApp;
 //  }
+
   @FXML
   void leihoa_aldatu(ActionEvent event) {
     if (event.getSource().equals(whatWeb_button)) {
+      cms_button.setEffect(new Blend());
+      izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(252,238,37),CornerRadii.EMPTY,Insets.EMPTY)));
+      titulua.setText("WHATWEB");
+      azpititulua.setText("Web orrialdeak eskanerra");
       whatWeb_button.toFront();
-      zerbitzariak.toBack();
-      cms.toBack();
+      Zerbitzariak.toBack();
+      Cms.toBack();
     }
     if (event.getSource().equals(zerbitzari_button)) {
-      zerbitzariak.toFront();
-      cms.toBack();
+      izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(156,156,156), CornerRadii.EMPTY, Insets.EMPTY)));
+      cms_button.setEffect(new Blend());
+      titulua.setText("ZERBITZARIEN ZERRENDA");
+      azpititulua.setText("Kontsultatu diren zerbitzarien zerrenda");
+      Zerbitzariak.toFront();
+      Cms.toBack();
       WhatWeb.toBack();
     }
     if (event.getSource().equals(cms_button)) {
-      cms.toFront();
+      izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
+      cms_button.setEffect(new Blend());
+      titulua.setText("CMS");
+      azpititulua.setText("WordPress, Joomla, PhpMyAdmin, Drupal");
+      Cms.toFront();
       WhatWeb.toBack();
-      zerbitzariak.toBack();
+      Zerbitzariak.toBack();
     }
+  }
+  public void hasieraketak_egin(){
+    titulua.setText("CMS");
+    azpititulua.setText("WordPress, Joomla, PhpMyAdmin, Drupal");
+    izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
+    cms_button.setEffect(new Blend(BlendMode.ADD));
+
   }
   @FXML
   void handleClose(MouseEvent event) {
     System.exit(0);
-
   }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
   }
-
-
 }

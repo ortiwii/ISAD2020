@@ -1,6 +1,9 @@
 package ehu.isad.controller.db;
 
 
+import ehu.isad.Services.Services;
+import ehu.isad.Services.SystemConection;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -21,30 +24,22 @@ public class WhatWebDBKud {
     }
 
     public void txertatu(String url){
-        Properties properties = null;
-        InputStream in = null;
+        if (!WhatWebDBKud.getInstance().bilatutaDago(url)){
+            InputStream in = null;
+            try {
+                String path = Services.getInstance().getPathToInsert();
+                File insert = new File(path);
 
-        try {
-            in = this.getClass().getResourceAsStream("/setup.properties");
-            properties = new Properties();
-            properties.load(in);
-
-            String tmp = properties.getProperty("pathToInsert");
-            String root = System.getProperty("user.dir");
-            String path = root+tmp;
-            System.out.println(path);
-            File insert = new File(path);
-
-            Scanner sc = new Scanner(insert);
-            while (sc.hasNextLine()){
-                String line = sc.nextLine();
-                line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
-                DBKudeatzaile.getInstantzia().execSQL(line);
+                Scanner sc = new Scanner(insert);
+                while (sc.hasNextLine()){
+                    String line = sc.nextLine();
+                    line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
+                    DBKudeatzaile.getInstantzia().execSQL(line);
+                }
+                SystemConection.getInstance().deleteFile();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            insert.delete();
-
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     public boolean bilatutaDago (String url){

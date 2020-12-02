@@ -1,14 +1,19 @@
 package ehu.isad;
 
+import ehu.isad.controller.ui.CMSKud;
 import ehu.isad.controller.ui.MainKud;
+import ehu.isad.controller.ui.WhatWebKud;
+import ehu.isad.controller.ui.ZerbitzariakKud;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 
 import java.io.IOException;
 
@@ -20,6 +25,9 @@ public class Main extends Application {
   private Stage stage;
 
   private MainKud mainKud;
+  private WhatWebKud whatWebKud;
+  private ZerbitzariakKud zerbitzariakKud;
+  private CMSKud cmsKud;
 
   private double xOffset = 0;
   private double yOffset = 0;
@@ -48,6 +56,7 @@ public class Main extends Application {
 
     stage.setTitle("WhatWEB");
     stage.setScene(mainScene);
+    mainKud.hasieraketak_egin();
     stage.show();
   }
   public void close (){
@@ -55,14 +64,51 @@ public class Main extends Application {
   }
   private void pantailakKargatu() throws IOException {
 
-    FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
-    mainUI = (Parent) loaderMain.load();
-    mainKud = loaderMain.getController();
-    mainScene = new Scene(mainUI);
-    mainKud.setMainApp(this);
+//    FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
+//    mainUI = (Parent) loaderMain.load();
+//    mainKud = loaderMain.getController();
+//    mainScene = new Scene(mainUI);
+//
+//    mainKud.setMainApp(this);
+
+
+      FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
+
+      mainKud=new MainKud(this);
+      whatWebKud=new WhatWebKud(this);
+      cmsKud=new CMSKud(this);
+      zerbitzariakKud=new ZerbitzariakKud(this);
+
+      Callback<Class<?>, Object> controllerFactory = type -> {
+          if (type == MainKud.class) {
+              return mainKud ;
+          } else if (type == WhatWebKud.class) {
+              return whatWebKud;
+          } else if (type == CMSKud.class) {
+              return cmsKud;
+          }else if (type == ZerbitzariakKud.class) {
+              return zerbitzariakKud;
+          } else {
+              // default behavior for controllerFactory:
+              try {
+                  return type.newInstance();
+              } catch (Exception exc) {
+                  exc.printStackTrace();
+                  throw new RuntimeException(exc); // fatal, just bail...
+              }
+          }
+      };
+
+      loaderMain.setControllerFactory(controllerFactory);
+
+      mainUI = (Parent) loaderMain.load();
+      mainScene = new Scene(mainUI);
+
   }
 
-
+  public void aldatuArratoia (Cursor cursor){
+    this.stage.getScene().setCursor(cursor);
+  }
   public static void main(String[] args) {
     launch(args);
   }
