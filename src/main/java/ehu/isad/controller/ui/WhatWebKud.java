@@ -1,5 +1,6 @@
 package ehu.isad.controller.ui;
 
+import ehu.isad.Main;
 import ehu.isad.Services.SystemConection;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
@@ -37,6 +38,10 @@ public class WhatWebKud implements Initializable {
 
     @FXML
     private Button eskaneatu_button_2;
+
+    public WhatWebKud(Main main) {
+        System.out.println("WhatWeb instantziatu da.");
+    }
 
 
     @Override

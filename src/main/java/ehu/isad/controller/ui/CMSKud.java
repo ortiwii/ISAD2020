@@ -2,6 +2,8 @@ package ehu.isad.controller.ui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import ehu.isad.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -25,6 +27,10 @@ public class CMSKud {
 
     @FXML
     private ComboBox<?> cbox;
+
+    public CMSKud(Main main) {
+        System.out.println("CMSKud instantziatu da.");
+    }
 
     @FXML
     void keyPressed(KeyEvent event) {

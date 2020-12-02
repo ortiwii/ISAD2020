@@ -30,13 +30,13 @@
          <children>
 <!--            Hemen agertzen dira inportatutako beste FXML-ak -->
             <AnchorPane fx:id="WhatWeb" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: white;">
-               <fx:include source="WhatWeb.fxml" />
+               <fx:include source="WhatWeb.fxml" fx:id="whatweb"/>
             </AnchorPane>
-            <AnchorPane fx:id="zerbitzariak" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: White;">
-               <fx:include source="Zerbitzariak.fxml" />
+            <AnchorPane fx:id="Zerbitzariak" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: White;">
+               <fx:include source="Zerbitzariak.fxml" fx:id="zerbitzariak" />
             </AnchorPane>
-            <AnchorPane fx:id="cms" prefHeight="426.0" prefWidth="773.0" style="-fx-background-color: White;">
-               <fx:include source="CMS.fxml" />
+            <AnchorPane fx:id="Cms" prefHeight="426.0" prefWidth="773.0" style="-fx-background-color: White;">
+               <fx:include source="CMS.fxml" fx:id="cms"/>
             </AnchorPane>
          </children>
       </StackPane>
