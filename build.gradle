@@ -24,7 +24,7 @@ java {
 }
 
 application {
-    mainModule = 'javafx' // name defined in module-info.java
+    mainModule = 'javafx' // RPM, DEB on Linux: On Red Hat Linux, we need the rpm-build package; on Ubuntu Linux, we need the fakeroot packagename defined in module-info.java
     mainClass = 'ehu.isad.Main'
 }
 

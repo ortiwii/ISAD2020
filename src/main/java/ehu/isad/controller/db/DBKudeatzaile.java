@@ -12,7 +12,12 @@ public class DBKudeatzaile {
 
 	private void conOpen(String dbpath) {
 		try {
+			//3.23.1
+			//Class.forName("org.sqlite.jdbc");
+			// Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("org.sqlite.JDBC").newInstance();
 			String url = "jdbc:sqlite:"+ dbpath ;
+			DriverManager.registerDriver(new org.sqlite.JDBC());
 			conn = DriverManager.getConnection(url);
 
 			System.out.println("Database connection established");
