@@ -42,6 +42,7 @@ public class SystemConection {
     }
     public void deleteFile () {
         try {
+//            System.out.println(System.getProperty("os.name").toLowerCase());
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 Runtime.getRuntime().exec
                         (System.getenv("windir") + "\\system32\\" + "wsl rm -r " +"/tmp/insert.sql");

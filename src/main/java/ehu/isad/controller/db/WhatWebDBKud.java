@@ -1,6 +1,7 @@
 package ehu.isad.controller.db;
 
 
+import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.Services.SystemConection;
 
@@ -9,10 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class WhatWebDBKud {
     private static WhatWebDBKud instantzia = new WhatWebDBKud();
@@ -63,6 +61,46 @@ public class WhatWebDBKud {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return emaitza;
+    }
+    public List<CMSTaulaModel> getAukerak (String url, String cms) {
+
+        String query = "";
+        List<CMSTaulaModel>emaitza = new ArrayList<>();
+
+        if( (url == null || url.equals("")) && (cms == null || cms.equals("")) ){ //Bi aldagaiak hutsik
+            System.out.println("1, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, S.version FROM targets T, Scans S, completeCMS c WHERE T.target_id = S.target_id AND S.plugin_id = c.plugin_id";
+        }else if ( url == null || url.equals("") ){ // url hutsik baina cms ez hutsik
+            System.out.println("2, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id;";
+        }else if ( cms == null || cms.equals("") ){ // url beteta baina cms hutsik
+            System.out.println("3, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, S.version FROM targets T, Scans S, completeCMS c WHERE T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id";
+        }else{ //Bi aldagaiak beteta
+            System.out.println("4, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id";
+        }
+
+        ResultSet rs = DBKudeatzaile.getInstantzia().execSQL(query);
+        try {
+            while(rs.next()){
+                String target = rs.getString("target");
+                String plugin_name = rs.getString("name");
+                String version = rs.getString("version");
+                String date = java.time.LocalDate.now().toString();
+                CMSTaulaModel actual = new CMSTaulaModel(target, plugin_name, version, date);
+                emaitza.add(actual);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return emaitza;
+    }
+    public List<CMSTaulaModel> getAukerak (String url){
+        List<CMSTaulaModel>emaitza = new ArrayList<>();
+
         return emaitza;
     }
 }
