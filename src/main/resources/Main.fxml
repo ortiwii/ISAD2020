@@ -16,11 +16,11 @@
    <children>
       <Pane fx:id="izen_panela" layoutX="243.0" layoutY="-2.0" prefHeight="178.0" prefWidth="798.0">
          <children>
-            <Label fx:id="azpititulua" layoutX="36.0" layoutY="111.0" prefHeight="41.0" prefWidth="726.0" text="bhgyihgbjkbjjnjknlknljkbjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjnljknjnknlkmlkabmglkbmlkmgfkblmdgkbmlkdfmblkafdnbjkndfknb kf  gbl dfb adjb" textFill="WHITE" wrapText="true">
+            <Label fx:id="azpititulua" layoutX="36.0" layoutY="111.0" prefHeight="41.0" prefWidth="726.0" text=" " textFill="WHITE" wrapText="true">
                <font>
                   <Font name="Arial Rounded MT Bold" size="17.0" />
                </font></Label>
-            <Label fx:id="titulua" layoutX="36.0" layoutY="36.0" prefHeight="58.0" prefWidth="726.0" text="b,fd,bplmf,bkmfk a fdb KMVK ABRK BK k  klfg kgf" textFill="WHITE">
+            <Label fx:id="titulua" layoutX="36.0" layoutY="36.0" prefHeight="58.0" prefWidth="726.0" text=" " textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="32.0" />
                </font>
@@ -30,13 +30,13 @@
          <children>
 <!--            Hemen agertzen dira inportatutako beste FXML-ak -->
             <AnchorPane fx:id="WhatWeb" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: white;">
-               <fx:include source="WhatWeb.fxml" fx:id="whatweb"/>
+               <fx:include fx:id="whatweb" source="WhatWeb.fxml" />
             </AnchorPane>
             <AnchorPane fx:id="Zerbitzariak" prefHeight="426.0" prefWidth="798.0" style="-fx-background-color: White;">
-               <fx:include source="Zerbitzariak.fxml" fx:id="zerbitzariak" />
+               <fx:include fx:id="zerbitzariak" source="Zerbitzariak.fxml" />
             </AnchorPane>
             <AnchorPane fx:id="Cms" prefHeight="426.0" prefWidth="773.0" style="-fx-background-color: White;">
-               <fx:include source="CMS.fxml" fx:id="cms"/>
+               <fx:include fx:id="cms" source="CMS.fxml" />
             </AnchorPane>
          </children>
       </StackPane>
@@ -53,7 +53,7 @@
                   <FontAwesomeIconView fill="WHITE" glyphName="XING" layoutX="41.0" layoutY="80.0" size="30" />
                </children>
             </Pane>
-            <Button id="lehenengoa" fx:id="cms_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="CMS" textFill="WHITE">
+            <Button id="lehenengoa" fx:id="cms_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="CMS" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView id="lehenengoa" accessibleRole="BUTTON" fill="WHITE" size="20" text="" />
                </graphic>
@@ -70,7 +70,7 @@
                   <Blend mode="ADD" opacity="0.5" />
                </effect>
             </Button>
-            <Button id="bigarrena" fx:id="zerbitzari_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="Server" textFill="WHITE">
+            <Button id="bigarrena" fx:id="zerbitzari_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="Server" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="CLOUD" size="20" />
                </graphic>
@@ -81,7 +81,7 @@
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
             </Button>
-            <Button id="hirugarrena" fx:id="whatWeb_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#leihoa_aldatu" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="WhatWeb" textFill="WHITE">
+            <Button id="hirugarrena" fx:id="whatWeb_button" alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="65.0" prefWidth="251.0" stylesheets="@tab.css" text="WhatWeb" textFill="WHITE">
                <graphic>
                   <FontAwesomeIconView fill="WHITE" glyphName="COG" size="20" />
                </graphic>

@@ -1,6 +1,7 @@
 package ehu.isad.controller.db;
 
 
+import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.Services.SystemConection;
 
@@ -9,10 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Scanner;
+import java.util.*;
 
 public class WhatWebDBKud {
     private static WhatWebDBKud instantzia = new WhatWebDBKud();
@@ -23,8 +21,8 @@ public class WhatWebDBKud {
         return instantzia;
     }
 
-    public void txertatu(String url){
-        if (!WhatWebDBKud.getInstance().bilatutaDago(url)){
+    public void txertatu(String target){
+        if (!WhatWebDBKud.getInstance().bilatutaDago(target)){
             InputStream in = null;
             try {
                 String path = Services.getInstance().getPathToInsert();
@@ -37,10 +35,19 @@ public class WhatWebDBKud {
                     DBKudeatzaile.getInstantzia().execSQL(line);
                 }
                 SystemConection.getInstance().deleteFile();
+//                 //Data txertatu behar da
+//                this.txertatuData(target);
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+    }
+    private void txertatuData (String target){
+        Calendar calendar = Calendar.getInstance();
+        System.out.println(calendar.getTime());
+        String query = "UPDATE targets SET date = CURDATE() WHERE target LIKE '%"+target+"%';";
+        DBKudeatzaile.getInstantzia().execSQL(query);
     }
     public boolean bilatutaDago (String url){
         String query = "SELECT * FROM targets WHERE target = '"+url+"';";
@@ -54,7 +61,7 @@ public class WhatWebDBKud {
     }
     public List<String> getBilaketak(){
         List<String> emaitza = new ArrayList<>();
-        String query = "SELECT target FROM targets;";
+        String query = "SELECT target FROM targets where status like 200;";
         ResultSet rs = DBKudeatzaile.getInstantzia().execSQL(query);
         try {
             while(rs.next()){
@@ -64,5 +71,58 @@ public class WhatWebDBKud {
             throwables.printStackTrace();
         }
         return emaitza;
+    }
+    public List<CMSTaulaModel> getAukerak (String url, String cms) {
+
+        String query = "";
+        List<CMSTaulaModel>emaitza = new ArrayList<>();
+
+        if( (url == null || url.equals("")) && (cms == null || cms.equals("")) ){ //Bi aldagaiak hutsik
+            System.out.println("1, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, 0 as version, T.date FROM targets T, Scans S, completeCMS c WHERE T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name LIKE '%unknown%' AND T.status LIKE 200\n" +
+                    "union\n" +
+                    "SELECT DISTINCT T.target, c.name, S.version,T.date FROM targets T, Scans S, completeCMS c WHERE T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name NOT LIKE '%unknown%' AND T.status LIKE 200";
+
+        }else if ( url == null || url.equals("") ){ // url hutsik baina cms ez hutsik
+            System.out.println("2, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, T.date, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND T.status LIKE 200;" ;
+        }else if ( cms == null || cms.equals("") ){ // url beteta baina cms hutsik
+            System.out.println("3, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, 0 as version, T.date FROM targets T, Scans S, completeCMS c WHERE T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name LIKE '%unknown%' AND T.status LIKE 200\n" +
+                    "union\n" +
+                    "SELECT DISTINCT T.target, c.name, S.version,T.date FROM targets T, Scans S, completeCMS c WHERE T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name NOT LIKE '%unknown%' AND T.status LIKE 200";
+        }else{ //Bi aldagaiak beteta
+            System.out.println("4, "+url+", "+cms);
+            query = "SELECT DISTINCT T.target, c.name, T.date, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND T.status LIKE 200";
+        }
+
+        ResultSet rs = DBKudeatzaile.getInstantzia().execSQL(query);
+        try {
+            while(rs.next()){
+                String target = rs.getString("target");
+                String plugin_name = rs.getString("name");
+                String version = rs.getString("version");
+                String date = rs.getString("date");
+                CMSTaulaModel actual = new CMSTaulaModel(target, plugin_name, version, date);
+                emaitza.add(actual);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return emaitza;
+    }
+    public List<String> getCMS (){
+        List<String> list = new ArrayList<>();
+        String query = "SELECT DISTINCT p.name FROM plugins p inner join cms c on p.plugin_id = c.plugin_id";
+        ResultSet rs = DBKudeatzaile.getInstantzia().execSQL(query);
+        try {
+            while(rs.next()){
+                list.add(rs.getString("name"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return list;
     }
 }

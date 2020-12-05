@@ -105,7 +105,12 @@ public class Main extends Application {
       mainScene = new Scene(mainUI);
 
   }
-
+  public void aldatuPantaila(int index){
+      this.mainKud.aldatu_lehioa(index);
+  }
+  public void zerbitzariakBerriztatu(){
+      this.zerbitzariakKud.eguneratu();
+  }
   public void aldatuArratoia (Cursor cursor){
     this.stage.getScene().setCursor(cursor);
   }
