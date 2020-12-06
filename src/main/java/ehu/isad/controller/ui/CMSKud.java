@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import ehu.isad.Main;
 
 import ehu.isad.CMSTaulaModel;
+import ehu.isad.Services.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -80,6 +81,7 @@ public class CMSKud {
     void onClick(ActionEvent event) {
         if (event.getSource() == addUrlButton){
             this.aldatuWhatWebPantailara();
+            Services.getInstance().getURLImage("");
         }
     }
     @FXML

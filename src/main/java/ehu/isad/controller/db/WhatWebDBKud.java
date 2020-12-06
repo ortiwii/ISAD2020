@@ -35,19 +35,11 @@ public class WhatWebDBKud {
                     DBKudeatzaile.getInstantzia().execSQL(line);
                 }
                 SystemConection.getInstance().deleteFile();
-//                 //Data txertatu behar da
-//                this.txertatuData(target);
 
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-    }
-    private void txertatuData (String target){
-        Calendar calendar = Calendar.getInstance();
-        System.out.println(calendar.getTime());
-        String query = "UPDATE targets SET date = CURDATE() WHERE target LIKE '%"+target+"%';";
-        DBKudeatzaile.getInstantzia().execSQL(query);
     }
     public boolean bilatutaDago (String url){
         String query = "SELECT * FROM targets WHERE target = '"+url+"';";
