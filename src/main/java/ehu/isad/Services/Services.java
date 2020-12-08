@@ -1,9 +1,18 @@
 package ehu.isad.Services;
 
-import it.grabz.grabzit.GrabzItClient;
+import javafx.scene.image.Image;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.Properties;
 
 
@@ -11,9 +20,7 @@ public class Services {
 
     //Singleton
     private static Services services = new Services();
-    private Services (){
-//        System.setProperty("javax.xml.bind.JAXBContextFactory", "org.eclipse.persistence.jaxb.JAXBContextFactory");
-    }
+    private Services (){    }
     public static Services getInstance(){
         return services;
     }
@@ -37,24 +44,48 @@ public class Services {
         return path;
     }
 
-    public void getURLImage(String url){
-//        //Create the GrabzItClient class
-//        //Replace "APPLICATION KEY", "APPLICATION SECRET" with the values from your account!
-//        GrabzItClient grabzIt = new GrabzItClient("YjI1NmQxYzk1MGI1NGMxYjg1MDk2M2JmN2Q4MGUxNTI=", "PwBZM1Y/P0w/PxM/fz8QPz8bPzQ3Oz8/PwRfP28/Pz8=");
-//        System.out.println(0);
-//        try {
-//            grabzIt.URLToImage("https://ikasten.io/");
-//            System.out.println(1);
-//            String filepath = "C:\\img.jpg";
-//            System.out.println(grabzIt.SaveTo(filepath));
-//            System.out.println(2);
-//
-//        } catch (UnsupportedEncodingException e) {
-//            System.out.println("e1");
-//            e.printStackTrace();
-//        } catch (Exception e) {
-//            System.out.println("e2");
-//            e.printStackTrace();
-//        }
+    public Image getURLImage(String url) {
+        String path = "";
+        URL con = null;
+        try {
+            con = new URL("http://elbarto.bar:3000/?page="+url);
+            URLConnection yc = con.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(
+                    yc.getInputStream()));
+            String inputLine;
+            while ((inputLine = in.readLine()) != null){
+                if (inputLine.contains("img src=")){
+                    path = inputLine;
+                }
+            }
+            in.close();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        path="http://elbarto.bar:3000/"+path.split("'")[1];
+        if (path != ""){
+            return this.createImage(path);
+        }else{
+            return null;
+        }
+    }
+    private Image createImage(String url) {
+        Image image= null;
+        try{
+            url = url.replace("-S", "-M");
+            URLConnection conn = new URL(url).openConnection();
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.121 Safari/537.36");
+            try (InputStream stream = conn.getInputStream()) {
+                image = new Image(stream, 700, 700, true, false);
+
+            }
+        }catch (MalformedURLException e) {
+            e.printStackTrace();
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
 }

@@ -1,9 +1,6 @@
 package ehu.isad;
 
-import ehu.isad.controller.ui.CMSKud;
-import ehu.isad.controller.ui.MainKud;
-import ehu.isad.controller.ui.WhatWebKud;
-import ehu.isad.controller.ui.ZerbitzariakKud;
+import ehu.isad.controller.ui.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;

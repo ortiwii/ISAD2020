@@ -4,6 +4,7 @@ package ehu.isad.controller.db;
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.Services.SystemConection;
+import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
