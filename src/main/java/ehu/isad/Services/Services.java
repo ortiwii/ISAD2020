@@ -1,15 +1,11 @@
 package ehu.isad.Services;
 
+import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.scene.image.Image;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -45,26 +41,33 @@ public class Services {
     }
 
     public Image getURLImage(String url) {
-        String path = "";
-        URL con = null;
-        try {
-            con = new URL("http://elbarto.bar:3000/?page="+url);
-            URLConnection yc = con.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(
-                    yc.getInputStream()));
-            String inputLine;
-            while ((inputLine = in.readLine()) != null){
-                if (inputLine.contains("img src=")){
-                    path = inputLine;
+
+        String path = WhatWebDBKud.getInstance().getIrudiPath(url);
+        System.out.println(path);
+
+        if (path == ""){
+            URL con = null;
+            try {
+                con = new URL("http://elbarto.bar:3000/?page="+url);
+                URLConnection yc = con.openConnection();
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        yc.getInputStream()));
+                String inputLine;
+                while ((inputLine = in.readLine()) != null){
+                    if (inputLine.contains("img src=")){
+                        path = inputLine;
+                    }
                 }
+                in.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            in.close();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            path="http://elbarto.bar:3000/"+path.split("'")[1];
+            WhatWebDBKud.getInstance().irudiaKargatu(url, path);
         }
-        path="http://elbarto.bar:3000/"+path.split("'")[1];
+
         if (path != ""){
             return this.createImage(path);
         }else{
@@ -72,6 +75,7 @@ public class Services {
         }
     }
     private Image createImage(String url) {
+
         Image image= null;
         try{
             url = url.replace("-S", "-M");

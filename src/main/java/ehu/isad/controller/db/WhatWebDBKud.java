@@ -23,24 +23,37 @@ public class WhatWebDBKud {
     }
 
     public void txertatu(String target){
-        if (!WhatWebDBKud.getInstance().bilatutaDago(target)){
-            InputStream in = null;
-            try {
-                String path = Services.getInstance().getPathToInsert();
-                File insert = new File(path);
-
-                Scanner sc = new Scanner(insert);
-                while (sc.hasNextLine()){
-                    String line = sc.nextLine();
-                    line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
-                    DBKudeatzaile.getInstantzia().execSQL(line);
-                }
-                SystemConection.getInstance().deleteFile();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        if (WhatWebDBKud.getInstance().bilatutaDago(target)) {
+            this.ezabatu(target);
         }
+        InputStream in = null;
+        try {
+            String path = Services.getInstance().getPathToInsert();
+            File insert = new File(path);
+
+            Scanner sc = new Scanner(insert);
+            while (sc.hasNextLine()){
+                String line = sc.nextLine();
+                line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
+                DBKudeatzaile.getInstantzia().execSQL(line);
+            }
+            SystemConection.getInstance().deleteFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void ezabatu (String target){
+
+        String query1 = "delete from request_configs where config_id in (SELECT DISTINCT S.config_id FROM targets T, scans S WHERE T.target LIKE '%"+target+"%' AND T.target_id = S.target_id);";
+        String query2 = "delete from scans where target_id like (SELECT T.target_id FROM targets T WHERE T.target LIKE '%"+target+"%');";
+        String query3 = "delete from targets where target LIKE '%"+target+"%';";
+
+        DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
+        dbKudeatzaile.execSQL(query1);
+        dbKudeatzaile.execSQL(query2);
+        dbKudeatzaile.execSQL(query3);
+
     }
     public boolean bilatutaDago (String url){
         String query = "SELECT * FROM targets WHERE target = '"+url+"';";
@@ -117,5 +130,23 @@ public class WhatWebDBKud {
             throwables.printStackTrace();
         }
         return list;
+    }
+    public String getIrudiPath (String url){
+        String query = "SELECT path FROM urlKaptura WHERE url LIKE '%"+url+"%';";
+        ResultSet rs = DBKudeatzaile.getInstantzia().execSQL(query);
+        try {
+            if (rs.next()){
+                return rs.getString("path");
+            }else{
+                return "";
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return "";
+    }
+    public void irudiaKargatu(String url, String path){
+        String query = "insert into urlKaptura values ('"+url+"', '"+path+"');";
+        DBKudeatzaile.getInstantzia().execSQL(query);
     }
 }

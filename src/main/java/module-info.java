@@ -6,5 +6,6 @@ open module javafx {
   requires javafx.base;
   requires de.jensd.fx.fontawesomefx.fontawesome;
   requires org.jsoup;
-  exports ehu.isad;
+    requires java.desktop;
+    exports ehu.isad;
 }

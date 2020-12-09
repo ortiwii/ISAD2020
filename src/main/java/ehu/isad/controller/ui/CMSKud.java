@@ -133,8 +133,6 @@ public class CMSKud {
                                     this.getScene().setCursor(Cursor.DEFAULT);
                                     ImageView imageView = new ImageView(image);
                                     alert.setGraphic(imageView);
-//                                    alert.setHeight(200);
-//                                    alert.setWidth(200);
                                     alert.showAndWait();
                                 });
                             });
@@ -156,6 +154,7 @@ public class CMSKud {
             }
         };
         colBtn.setCellFactory(cellFactory);
+        colBtn.setStyle( "-fx-alignment: CENTER;");
         tbData.getColumns().add(colBtn);
 
     }
