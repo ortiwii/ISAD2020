@@ -71,9 +71,8 @@ public class WhatWebKud implements Initializable {
 
         Thread thread = new Thread(() -> {
 
-            //TODO --> ARRATOIA ALDATU KARGTZEN
-
             this.main.aldatuArratoia(Cursor.WAIT);
+            this.url_txt_1.setEditable(false);
             String newLine = System.getProperty("line.separator");
             final StringBuilder emaitza = new StringBuilder();
             String url = url_txt_1.getText();
@@ -87,7 +86,8 @@ public class WhatWebKud implements Initializable {
                 url_txt_1.setText(url);
                 WhatWebDBKud.getInstance().txertatu(url);
                 this.main.aldatuArratoia(Cursor.DEFAULT);
-                //TODO --> ARRATOIA ALDATU DEFAULT
+                this.url_txt_1.setEditable(true);
+
             });
         });
         thread.start();

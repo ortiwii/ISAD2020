@@ -36,15 +36,17 @@ mainClassName = "$moduleName/ehu.isad.Main"
 
 javafx {
     version = "12"
-    modules = [ 'javafx.graphics', 'javafx.fxml', 'javafx.controls']
+    modules = [ 'javafx.graphics', 'javafx.fxml', 'javafx.controls' ]
 }
-
 
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
     // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
     compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+
+    // jsoup HTML parser library @ https://jsoup.org/
+    compile 'org.jsoup:jsoup:1.13.1'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

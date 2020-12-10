@@ -10,6 +10,7 @@ public class CMSTaulaModel {
     private String version;
     private String date;
 
+
     public CMSTaulaModel(String url, String cms, String version, String date) {
         this.url = url;
         this.cms = cms;

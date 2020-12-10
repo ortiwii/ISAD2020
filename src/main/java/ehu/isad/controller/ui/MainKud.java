@@ -48,6 +48,7 @@ public class MainKud implements Initializable {
 
   @FXML
   private AnchorPane WhatWeb;
+
   @FXML
   private FontAwesomeIconView btnClose;
 
@@ -90,7 +91,7 @@ public class MainKud implements Initializable {
       whatWeb_button.toFront();
       Zerbitzariak.toBack();
       Cms.toBack();
-    }
+    }else
     if (index == 1) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(156,156,156), CornerRadii.EMPTY, Insets.EMPTY)));
       cms_button.setEffect(new Blend());
@@ -100,7 +101,7 @@ public class MainKud implements Initializable {
       Zerbitzariak.toFront();
       Cms.toBack();
       WhatWeb.toBack();
-    }
+    }else
     if (index == 0) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
       cms_button.setEffect(new Blend());
