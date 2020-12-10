@@ -1,9 +1,6 @@
 package ehu.isad;
 
-import ehu.isad.controller.ui.CMSKud;
-import ehu.isad.controller.ui.MainKud;
-import ehu.isad.controller.ui.WhatWebKud;
-import ehu.isad.controller.ui.ZerbitzariakKud;
+import ehu.isad.controller.ui.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -105,7 +102,12 @@ public class Main extends Application {
       mainScene = new Scene(mainUI);
 
   }
-
+  public void aldatuPantaila(int index){
+      this.mainKud.aldatu_lehioa(index);
+  }
+  public void zerbitzariakBerriztatu(){
+      this.zerbitzariakKud.eguneratu();
+  }
   public void aldatuArratoia (Cursor cursor){
     this.stage.getScene().setCursor(cursor);
   }

@@ -19,10 +19,10 @@ import java.util.ResourceBundle;
 
 public class MainKud implements Initializable {
 
-  private Main mainApp=null;
+  private Main main;
 
   public MainKud(Main main){
-    System.out.println("MainKud instantziatu da.");
+    this.main = main;
   }
   @FXML
   private AnchorPane Cms;
@@ -48,19 +48,20 @@ public class MainKud implements Initializable {
 
   @FXML
   private AnchorPane WhatWeb;
+
   @FXML
   private FontAwesomeIconView btnClose;
 
 
 
-  @FXML
-  private CMSKud cmsController;
-
-  @FXML
-  private WhatWebKud whatwebController;
-
-  @FXML
-  private ZerbitzariakKud zerbitzariakController;
+//  @FXML
+//  private CMSKud cmsController;
+//
+//  @FXML
+//  private WhatWebKud whatwebController;
+//
+//  @FXML
+//  private ZerbitzariakKud zerbitzariakController;
 
 
 
@@ -70,8 +71,19 @@ public class MainKud implements Initializable {
 //  }
 
   @FXML
-  void leihoa_aldatu(ActionEvent event) {
+  void onClick(ActionEvent event) {
     if (event.getSource().equals(whatWeb_button)) {
+      this.aldatu_lehioa(2);
+    }
+    if (event.getSource().equals(zerbitzari_button)) {
+      this.aldatu_lehioa(1);
+    }
+    if (event.getSource().equals(cms_button)) {
+      this.aldatu_lehioa(0);
+    }
+  }
+  public void aldatu_lehioa (int index){
+    if (index == 2) {
       cms_button.setEffect(new Blend());
       izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(252,238,37),CornerRadii.EMPTY,Insets.EMPTY)));
       titulua.setText("WHATWEB");
@@ -79,17 +91,18 @@ public class MainKud implements Initializable {
       whatWeb_button.toFront();
       Zerbitzariak.toBack();
       Cms.toBack();
-    }
-    if (event.getSource().equals(zerbitzari_button)) {
+    }else
+    if (index == 1) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(156,156,156), CornerRadii.EMPTY, Insets.EMPTY)));
       cms_button.setEffect(new Blend());
       titulua.setText("ZERBITZARIEN ZERRENDA");
       azpititulua.setText("Kontsultatu diren zerbitzarien zerrenda");
+      this.main.zerbitzariakBerriztatu();
       Zerbitzariak.toFront();
       Cms.toBack();
       WhatWeb.toBack();
-    }
-    if (event.getSource().equals(cms_button)) {
+    }else
+    if (index == 0) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
       cms_button.setEffect(new Blend());
       titulua.setText("CMS");

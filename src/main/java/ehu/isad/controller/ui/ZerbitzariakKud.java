@@ -15,6 +15,8 @@ import javafx.scene.control.ListView;
 
 public class ZerbitzariakKud {
 
+    private Main main;
+
     @FXML
     private ResourceBundle resources;
 
@@ -30,7 +32,7 @@ public class ZerbitzariakKud {
     private ObservableList<String> targets = FXCollections.observableArrayList();
 
     public ZerbitzariakKud(Main main) {
-        System.out.println("ZerbitzariakKud instantziatu da.");
+        this.main = main;
     }
 
     @FXML
@@ -42,7 +44,7 @@ public class ZerbitzariakKud {
     void initialize() {
         this.eguneratu();
     }
-    private void eguneratu(){
+    public void eguneratu(){
         List<String> list = WhatWebDBKud.getInstance().getBilaketak();
         targets.setAll(list);
         web_zerrenda.setItems(targets);

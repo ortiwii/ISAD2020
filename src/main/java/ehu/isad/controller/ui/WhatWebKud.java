@@ -19,6 +19,8 @@ import java.util.ResourceBundle;
 
 public class WhatWebKud implements Initializable {
 
+    private Main main;
+
     @FXML
     private TextField url_txt_1;
 
@@ -40,7 +42,7 @@ public class WhatWebKud implements Initializable {
     private Button eskaneatu_button_2;
 
     public WhatWebKud(Main main) {
-        System.out.println("WhatWeb instantziatu da.");
+        this.main = main;
     }
 
 
@@ -69,8 +71,8 @@ public class WhatWebKud implements Initializable {
 
         Thread thread = new Thread(() -> {
 
-            //TODO --> ARRATOIA ALDATU KARGTZEN
-
+            this.main.aldatuArratoia(Cursor.WAIT);
+            this.url_txt_1.setEditable(false);
             String newLine = System.getProperty("line.separator");
             final StringBuilder emaitza = new StringBuilder();
             String url = url_txt_1.getText();
@@ -83,7 +85,9 @@ public class WhatWebKud implements Initializable {
                 log_txt_1.setText(emaitza.toString());
                 url_txt_1.setText(url);
                 WhatWebDBKud.getInstance().txertatu(url);
-                //TODO --> ARRATOIA ALDATU DEFAULT
+                this.main.aldatuArratoia(Cursor.DEFAULT);
+                this.url_txt_1.setEditable(true);
+
             });
         });
         thread.start();

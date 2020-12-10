@@ -24,9 +24,9 @@ public class SystemConection {
                 Process p = null;
                 if (System.getProperty("os.name").toLowerCase().contains("win")) {
                     p = Runtime.getRuntime().exec
-                            (System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --log-sql=/tmp/insert.sql "+url);
+                            (System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql "+url);
                 } else {
-                    p = Runtime.getRuntime().exec("whatweb --colour=never --log-sql=/tmp/insert.sql "+url);
+                    p = Runtime.getRuntime().exec("whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql "+url);
                 }
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -42,6 +42,7 @@ public class SystemConection {
     }
     public void deleteFile () {
         try {
+//            System.out.println(System.getProperty("os.name").toLowerCase());
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 Runtime.getRuntime().exec
                         (System.getenv("windir") + "\\system32\\" + "wsl rm -r " +"/tmp/insert.sql");
