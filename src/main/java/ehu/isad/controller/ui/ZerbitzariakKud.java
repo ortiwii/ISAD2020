@@ -26,24 +26,18 @@ public class ZerbitzariakKud {
     @FXML
     private ListView<String> web_zerrenda;
 
-    @FXML
-    private Button eguneratu_button;
-
     private ObservableList<String> targets = FXCollections.observableArrayList();
 
     public ZerbitzariakKud(Main main) {
         this.main = main;
     }
 
-    @FXML
-    void OnClick(ActionEvent event) {
-        this.eguneratu();
-    }
 
     @FXML
     void initialize() {
-        this.eguneratu();
+        eguneratu();
     }
+
     public void eguneratu(){
         List<String> list = WhatWebDBKud.getInstance().getBilaketak();
         targets.setAll(list);

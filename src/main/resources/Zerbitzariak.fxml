@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -9,7 +8,7 @@
 
 <AnchorPane prefHeight="420.0" prefWidth="798.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ehu.isad.controller.ui.ZerbitzariakKud">
    <children>
-      <ListView fx:id="web_zerrenda" layoutX="258.0" layoutY="43.0" prefHeight="278.0" prefWidth="281.0" />
+      <ListView fx:id="web_zerrenda" layoutX="193.0" layoutY="43.0" prefHeight="342.0" prefWidth="379.0" />
       <Label layoutX="258.0" layoutY="9.0" prefHeight="18.0" prefWidth="282.0" text="Eskaneatutako WebGuneak:">
          <graphic>
             <FontAwesomeIconView glyphName="SEARCH" />
@@ -18,6 +17,5 @@
             <Font size="19.0" />
          </font>
       </Label>
-      <Button fx:id="eguneratu_button" layoutX="332.0" layoutY="343.0" mnemonicParsing="false" onAction="#OnClick" prefHeight="36.0" prefWidth="134.0" text="Eguneratu" />
    </children>
 </AnchorPane>

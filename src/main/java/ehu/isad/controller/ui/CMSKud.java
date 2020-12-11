@@ -1,13 +1,7 @@
 package ehu.isad.controller.ui;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-
-import ehu.isad.Main;
-
 import ehu.isad.CMSTaulaModel;
+import ehu.isad.Main;
 import ehu.isad.Services.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
@@ -16,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -24,10 +17,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class CMSKud {
 
@@ -72,10 +67,16 @@ public class CMSKud {
         this.main = main;
     }
 
+    public void zerrendaKargatu(){
+        List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak("", "");
+        taulaModels.setAll(aukerak);
+        tbData.refresh();
+    }
+
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
-            List<CMSTaulaModel>aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
+            List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
             taulaModels.setAll(aukerak);
             tbData.refresh();
         }
@@ -97,18 +98,25 @@ public class CMSKud {
 
         List<String> list = WhatWebDBKud.getInstance().getCMS();
         ObservableList<String> cms = FXCollections.observableArrayList(list);
-        this.cbox.setItems(cms);
+        cbox.setItems(cms);
 
         tbData.setEditable(false);
 
         urlColumn.setCellValueFactory(new PropertyValueFactory<>("Url"));
-         cmsColumn.setCellValueFactory(new PropertyValueFactory<>("Cms"));
+        cmsColumn.setCellValueFactory(new PropertyValueFactory<>("Cms"));
         versionColumn.setCellValueFactory(new PropertyValueFactory<>("Version"));
         lastUpdatedColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
-        tbData.setItems(this.taulaModels);
-        this.addButtonToTable();
+        tbData.setItems(taulaModels);
+        addButtonToTable();
+        zerrendaKargatu();
     }
+
+    public void eguneratuTaula(){
+        WhatWebDBKud.getInstance().getCMS();
+        List<String> list = WhatWebDBKud.getInstance().getCMS();
+    }
+
     private void addButtonToTable() {
         TableColumn<CMSTaulaModel, Void> colBtn = new TableColumn("Irudiak");
 
