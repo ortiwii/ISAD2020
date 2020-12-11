@@ -2,6 +2,7 @@ package ehu.isad.controller.ui;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -16,7 +17,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -24,9 +24,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 public class CMSKud {
@@ -75,9 +72,7 @@ public class CMSKud {
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
-            List<CMSTaulaModel>aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
-            taulaModels.setAll(aukerak);
-            tbData.refresh();
+            this.bilatu();
         }
     }
     @FXML
@@ -108,6 +103,8 @@ public class CMSKud {
 
         tbData.setItems(this.taulaModels);
         this.addButtonToTable();
+
+        this.bilatu();
     }
     private void addButtonToTable() {
         TableColumn<CMSTaulaModel, Void> colBtn = new TableColumn("Irudiak");
@@ -157,6 +154,26 @@ public class CMSKud {
         colBtn.setStyle( "-fx-alignment: CENTER;");
         tbData.getColumns().add(colBtn);
 
+    }
+    @FXML
+    void tblKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.DELETE){
+            this.ezabatuBilaketa(tbData.getSelectionModel().getSelectedItems());
+        }
+    }
+    private void ezabatuBilaketa(ObservableList<CMSTaulaModel> selectedItems){
+        Iterator<CMSTaulaModel> itr = selectedItems.iterator();
+        while (itr.hasNext()){
+            CMSTaulaModel act = itr.next();
+            WhatWebDBKud.getInstance().ezabatu(act.getUrl());
+            taulaModels.remove(act);
+        }
+        tbData.refresh();
+    }
+    private void bilatu(){
+        List<CMSTaulaModel>aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
+        taulaModels.setAll(aukerak);
+        tbData.refresh();
     }
     private void aldatuWhatWebPantailara () {
         this.main.aldatuPantaila(2);
