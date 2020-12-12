@@ -5,6 +5,7 @@ open module javafx {
   requires java.sql;
   requires javafx.base;
   requires de.jensd.fx.fontawesomefx.fontawesome;
-
+    requires java.desktop;
   exports ehu.isad;
+
 }

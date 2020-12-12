@@ -43,16 +43,17 @@ public class WhatWebDBKud {
             e.printStackTrace();
         }
     }
-    private void ezabatu (String target){
+    public void ezabatu (String target){
 
         String query1 = "delete from request_configs where config_id in (SELECT DISTINCT S.config_id FROM targets T, scans S WHERE T.target LIKE '%"+target+"%' AND T.target_id = S.target_id);";
         String query2 = "delete from scans where target_id like (SELECT T.target_id FROM targets T WHERE T.target LIKE '%"+target+"%');";
         String query3 = "delete from targets where target LIKE '%"+target+"%';";
-
+        String query4 = "delete from urlKaptura where url = '%"+target+"%';";
         DBKudeatzaile dbKudeatzaile = DBKudeatzaile.getInstantzia();
         dbKudeatzaile.execSQL(query1);
         dbKudeatzaile.execSQL(query2);
         dbKudeatzaile.execSQL(query3);
+        dbKudeatzaile.execSQL(query4);
 
     }
     public boolean bilatutaDago (String url){

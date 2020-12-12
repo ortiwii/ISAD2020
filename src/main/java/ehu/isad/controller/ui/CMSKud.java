@@ -1,7 +1,15 @@
 package ehu.isad.controller.ui;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Main;
+
+import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
@@ -78,6 +86,7 @@ public class CMSKud {
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
+            this.bilatu();
             List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
             taulaModels.setAll(aukerak);
             tbData.refresh();
@@ -112,6 +121,10 @@ public class CMSKud {
         tbData.setItems(taulaModels);
         addButtonToTable();
         zerrendaKargatu();
+        tbData.setItems(this.taulaModels);
+        this.addButtonToTable();
+
+        this.bilatu();
     }
 
     public void eguneratuTaula(){
@@ -176,6 +189,26 @@ public class CMSKud {
         colBtn.setStyle( "-fx-alignment: CENTER;");
         tbData.getColumns().add(colBtn);
 
+    }
+    @FXML
+    void tblKeyPressed(KeyEvent event) {
+        if (event.getCode() == KeyCode.DELETE){
+            this.ezabatuBilaketa(tbData.getSelectionModel().getSelectedItems());
+        }
+    }
+    private void ezabatuBilaketa(ObservableList<CMSTaulaModel> selectedItems){
+        Iterator<CMSTaulaModel> itr = selectedItems.iterator();
+        while (itr.hasNext()){
+            CMSTaulaModel act = itr.next();
+            WhatWebDBKud.getInstance().ezabatu(act.getUrl());
+            taulaModels.remove(act);
+        }
+        tbData.refresh();
+    }
+    private void bilatu(){
+        List<CMSTaulaModel>aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
+        taulaModels.setAll(aukerak);
+        tbData.refresh();
     }
     private void aldatuWhatWebPantailara () {
         this.main.aldatuPantaila(2);
