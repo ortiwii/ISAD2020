@@ -70,7 +70,7 @@ jlink {
             jpackageHome = "/Users/<user>/Downloads/jdk-13.jdk/Contents/Home"
         } else if (javafx.getPlatform().name() == "WINDOWS") {
             installerType = "exe"
-            jpackageHome = "C:\\Users\\Gorka\\.sdkman\\candidates\\java\\15.0.1.hs-adpt"
+            jpackageHome = "C:\\Users\\Gorka\\.jdks\\openjdk-14.0.2"
             installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
         }
     }
