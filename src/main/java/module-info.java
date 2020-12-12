@@ -5,6 +5,8 @@ open module javafx {
   requires java.sql;
   requires javafx.base;
   requires de.jensd.fx.fontawesomefx.fontawesome;
+  requires sqlite.jdbc;
+  requires org.apache.commons.io;
     requires java.desktop;
   exports ehu.isad;
 

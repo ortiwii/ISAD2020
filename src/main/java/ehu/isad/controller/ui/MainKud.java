@@ -88,6 +88,7 @@ public class MainKud implements Initializable {
 
     if (index == 2) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(33,132,154),CornerRadii.EMPTY,Insets.EMPTY)));
+      cms_button.setEffect(new Blend());
       titulua.setText("WHATWEB");
       azpititulua.setText("Web orrialdeak eskanerra");
       whatWeb_button.toFront();
