@@ -7,6 +7,8 @@ import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
+import javafx.css.StyleClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -123,11 +125,20 @@ public class CMSKud {
         Callback<TableColumn<CMSTaulaModel, Void>, TableCell<CMSTaulaModel, Void>> cellFactory = new Callback<TableColumn<CMSTaulaModel, Void>, TableCell<CMSTaulaModel, Void>>() {
             @Override
             public TableCell<CMSTaulaModel, Void> call(final TableColumn<CMSTaulaModel, Void> param) {
+                PseudoClass botoia=PseudoClass.getPseudoClass("default");
                 final TableCell<CMSTaulaModel, Void> cell = new TableCell<CMSTaulaModel, Void>() {
 
                     private final Button btn = new Button("Web Orria");
 
                     {
+//                        Zerrendako Button guztien CSS estiloak aplikatzen dira
+
+                        btn.setStyle("-fx-background-color: #9370db;" +
+                                "-fx-text-fill: #FFFFFF;" +
+                                "-fx-background-radius: 0;" +
+                                "-fx-max-width: 200;" +
+                                "-fx-padding: 5");
+
                         btn.setOnAction((ActionEvent event) -> {
 
                             Thread thread = new Thread(() -> {
