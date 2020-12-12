@@ -78,18 +78,13 @@ public class CMSKud {
     }
 
     public void zerrendaKargatu(){
-        List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak("", "");
-        taulaModels.setAll(aukerak);
-        tbData.refresh();
+        this.bilatu();
     }
 
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
             this.bilatu();
-            List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
-            taulaModels.setAll(aukerak);
-            tbData.refresh();
         }
     }
     @FXML
@@ -118,18 +113,10 @@ public class CMSKud {
         versionColumn.setCellValueFactory(new PropertyValueFactory<>("Version"));
         lastUpdatedColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
-        tbData.setItems(taulaModels);
-        addButtonToTable();
-        zerrendaKargatu();
         tbData.setItems(this.taulaModels);
         this.addButtonToTable();
 
         this.bilatu();
-    }
-
-    public void eguneratuTaula(){
-        WhatWebDBKud.getInstance().getCMS();
-        List<String> list = WhatWebDBKud.getInstance().getCMS();
     }
 
     private void addButtonToTable() {

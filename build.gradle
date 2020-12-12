@@ -10,6 +10,7 @@ plugins {
     id 'java'
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.7'
+    id 'org.beryx.jlink' version '2.21.1'
 }
 
 sourceCompatibility = 11
@@ -48,8 +49,6 @@ dependencies {
 //    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
 //    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 
-    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
