@@ -1,10 +1,12 @@
 package ehu.isad.Services;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import org.apache.commons.io.FileUtils;
+
+import java.io.*;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 public class SystemConection {
 
@@ -18,31 +20,38 @@ public class SystemConection {
 
     public List<String> execWhatWeb(String url) {
         List<String> processes = new LinkedList<String>();
-        if (!url.equals("") ) {
-            try{
-                String line;
-                Process p = null;
-                if (System.getProperty("os.name").toLowerCase().contains("win")) {
-                    p = Runtime.getRuntime().exec
-                            (System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql "+url);
-                } else {
-                    p = Runtime.getRuntime().exec("whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql "+url);
-                }
-                BufferedReader input =
-                        new BufferedReader(new InputStreamReader(p.getInputStream()));
-                while ((line = input.readLine()) != null) {
-                    processes.add(line);
-                }
-                input.close();
-            }catch (IOException e){
-                e.printStackTrace();
+        String comand = "";
+        if (!url.equals("")) {
+            String line;
+            Process p = null;
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                comand = System.getenv("windir") + "\\system32\\" + "wsl whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql " + url;
+
+            } else {
+                comand = "whatweb --colour=never --aggression 1 --log-sql=/tmp/insert.sql " + url;
             }
+            processes = this.exeqComand(comand);
+        }
+        return processes;
+    }
+    private List<String> exeqComand (String comand){
+        List<String> processes = new LinkedList<String>();
+        try{
+            String line;
+            Process p = Runtime.getRuntime().exec (comand);
+            BufferedReader input =
+                    new BufferedReader(new InputStreamReader(p.getInputStream()));
+            while ((line = input.readLine()) != null) {
+                processes.add(line);
+            }
+            input.close();
+        }catch (IOException e){
+            e.printStackTrace();
         }
         return processes;
     }
     public void deleteFile () {
         try {
-//            System.out.println(System.getProperty("os.name").toLowerCase());
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 Runtime.getRuntime().exec
                         (System.getenv("windir") + "\\system32\\" + "wsl rm -r " +"/tmp/insert.sql");
@@ -53,5 +62,4 @@ public class SystemConection {
             e.printStackTrace();
         }
     }
-
 }
