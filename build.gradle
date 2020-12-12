@@ -42,11 +42,13 @@ javafx {
 dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
 
-    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+    // https://mvnrepository.com/artifact/commons-io/commons-io
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
-    // jsoup HTML parser library @ https://jsoup.org/
-    compile 'org.jsoup:jsoup:1.13.1'
+
+//    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+//    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+
 }
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -62,20 +64,21 @@ jlink {
     options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = 'whatwebfx'
-
-        jvmArgs = [
-                "--add-opens", "javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons"
-        ]
+        jvmArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',
+                    '--add-opens', 'javafx.graphics/javafx.css=de.jensd.fx.fontawesomefx.commons',]
     }
 
     jpackage {
-        if (org.gradle.internal.os.OperatingSystem.current().windows) {
-            installerOptions += ['--win-per-user-install', '--win-dir-chooser', '--win-menu', '--win-shortcut']
+        if (javafx.getPlatform().name() == "OSX") {
+            installerType = "dmg"
+            jpackageHome = "/Users/<user>/Downloads/jdk-13.jdk/Contents/Home"
+        } else if (javafx.getPlatform().name() == "WINDOWS") {
+            installerType = "exe"
+            jpackageHome = "C:\\Users\\Gorka\\.jdks\\openjdk-14.0.2"
+            installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
         }
     }
 }
-
-
 run {
     inputs.property('moduleName', moduleName)
     doFirst {

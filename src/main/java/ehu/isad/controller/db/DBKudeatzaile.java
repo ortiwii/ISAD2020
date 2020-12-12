@@ -1,7 +1,12 @@
 package ehu.isad.controller.db;
 
+import ehu.isad.Services.SystemConection;
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.sql.*;
 import java.util.Properties;
 
@@ -12,7 +17,10 @@ public class DBKudeatzaile {
 
 	private void conOpen(String dbpath) {
 		try {
+			this.datubaseInizializazioa();
+			Class.forName("org.sqlite.JDBC").newInstance();
 			String url = "jdbc:sqlite:"+ dbpath ;
+			DriverManager.registerDriver(new org.sqlite.JDBC());
 			conn = DriverManager.getConnection(url);
 
 			System.out.println("Database connection established");
@@ -72,7 +80,7 @@ public class DBKudeatzaile {
 			}
 		}
 
-		this.conOpen(properties.getProperty("dbpath"));
+		this.conOpen(System.getProperty("user.home")+properties.getProperty("dbpath"));
 
 	}
 
@@ -101,5 +109,26 @@ public class DBKudeatzaile {
 		}
 
 		return rs;
+	}
+	private void datubaseInizializazioa (){
+
+		String home = "";
+		home = System.getProperty("user.home");
+
+		File directorio = new File(home + "/.whatwebfx");
+		try {
+			if (!directorio.exists()) {
+				if (directorio.mkdirs()) {
+					// Si el archivo no existe es creado
+					File file = new File(home + "/.whatwebfx/whatweb.sqlite");
+					if (!file.exists()) {
+						file.createNewFile();
+					}
+					FileUtils.copyURLToFile( new URL("http://elbarto.bar:3000/whatweb.sqlite"), file );
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

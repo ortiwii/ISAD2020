@@ -42,7 +42,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <TableView fx:id="tbData" prefHeight="356.0" prefWidth="761.0" GridPane.rowIndex="1">
+                  <TableView fx:id="tbData" onKeyPressed="#tblKeyPressed" prefHeight="356.0" prefWidth="761.0" GridPane.rowIndex="1">
                     <columns>
                       <TableColumn fx:id="urlColumn" prefWidth="75.0" text="URL" />
                       <TableColumn fx:id="cmsColumn" prefWidth="75.0" text="CMS" />
