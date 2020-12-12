@@ -6,16 +6,15 @@
 .tab {
     -fx-font-family: Arial;
     -fx-font-size: 18;
-    -fx-background-color:#603f96;
-}
-
-.tab:hover{
-    -fx-background-color : #2A1C42 ;
+    -fx-background-radius: 0;
+    -fx-background-color: rgb(33, 132, 154);
 }
 
 .tab:selected {
-    -fx-background-color: #3F2863;
     -fx-font-weight: bold;
+    /*-fx-background-color: #34c9ee;*/
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-color: #FC6F03, #34c9ee;
 }
 
 
@@ -25,21 +24,63 @@
 {
     -fx-background-color : #3f2863;
     -fx-text-fill: #FFFFFF;
-    -fx-font-weight: bold;
 }
 .button:hover{
-    -fx-background-color : #442d6b;
     -fx-cursor: hand;
 }
+#web{
+    -fx-max-width: 100%;
+    -fx-background-color: #9370db;
+    -fx-text-fill: #FFFFFF;
+}
+#garbitu{
+    -fx-background-color: rgb(252, 111, 3);
+}
+#eskaner{
+    -fx-background-color: rgb(33, 132, 154);
+}
+
 
 #lehenengoa:focused{
-    -fx-background-color: #9370db;
+    /*-fx-background-color: #9370db;*/
+    -fx-background-color: #ffffff, #9370db;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
+}
+#lehenengoa:aukeratua{
+    /*-fx-background-color: #9370db;*/
+    -fx-background-color: #ffffff, #9370db;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
 }
 
 #bigarrena:focused{
-    -fx-background-color : #9c9c9c;
+    /*-fx-background-color : #9c9c9c;*/
+    -fx-background-color: #ffffff, #9c9c9c;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
 }
+#bigarrena:aukeratua{
+    /*-fx-background-color : #9c9c9c;*/
+    -fx-background-color: #ffffff, #9c9c9c;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
+}
+
+
 #hirugarrena:focused{
-    -fx-background-color : #fffb2c;
+    /*-fx-background-color : rgb(33, 132, 154);*/
+    -fx-background-color: #ffffff, #21849A;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
 }
+
+#hirugarrena:aukeratua{
+    /*-fx-background-color : rgb(33, 132, 154);*/
+    -fx-background-color: #ffffff, #21849A;
+    -fx-background-insets: 0, 0 0 0 6;
+    -fx-background-radius: 0;
+}
+
+
 

@@ -17,11 +17,11 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="782.0">
                      <children>
                         <TextField fx:id="url_txt_1" layoutX="239.0" layoutY="39.0" onKeyPressed="#keyPressed" prefHeight="26.0" prefWidth="319.0" />
-                        <TextArea fx:id="log_txt_1" editable="false" layoutX="239.0" layoutY="86.0" prefHeight="200.0" prefWidth="318.0" wrapText="true" />
+                        <TextArea fx:id="log_txt_1" editable="false" layoutX="239.0" layoutY="86.0" prefHeight="238.0" prefWidth="318.0" wrapText="true" />
                         <Label layoutX="177.0" layoutY="44.0" text="URL:" />
                         <Label layoutX="175.0" layoutY="93.0" text="Log:" />
-                        <Button fx:id="eskaneatu_button_1" layoutX="406.0" layoutY="311.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="94.0" styleClass="success" stylesheets="@bootstrap3.css" text="Eskaneatu" />
-                        <Button fx:id="garbitu_button_1" layoutX="306.0" layoutY="311.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="85.0" styleClass="warning" stylesheets="@bootstrap3.css" text="Garbitu" />
+                        <Button id="eskaner" fx:id="eskaneatu_button_1" layoutX="415.0" layoutY="342.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="94.0" text="Eskaneatu" />
+                        <Button id="garbitu" fx:id="garbitu_button_1" layoutX="284.0" layoutY="342.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="94.0" text="Garbitu" />
                      </children>
                   </AnchorPane>
             </content>
@@ -30,11 +30,16 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                      <TextField fx:id="url_txt_2" layoutX="239.0" layoutY="39.0" prefHeight="26.0" prefWidth="319.0" />
-                      <TextArea fx:id="log_txt_2" layoutX="239.0" layoutY="86.0" prefHeight="200.0" prefWidth="318.0" wrapText="true" />
-                      <Label layoutX="177.0" layoutY="44.0" text="URL:" />
-                      <Label layoutX="175.0" layoutY="93.0" text="Log:" />
-                      <Button fx:id="eskaneatu_button_2" layoutX="373.0" layoutY="311.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="76.0" text="Eskaneatu" />
+                      <TextField fx:id="url_txt_2" layoutX="237.0" layoutY="13.0" prefHeight="26.0" prefWidth="319.0" />
+                      <TextArea fx:id="log_txt_2" layoutX="239.0" layoutY="130.0" prefHeight="200.0" prefWidth="318.0" wrapText="true" />
+                      <Label layoutX="185.0" layoutY="18.0" text="URL:" />
+                      <Label layoutX="184.0" layoutY="130.0" text="Log:" />
+                        <Label layoutX="143.0" layoutY="54.0" text="Erabiltzailea:" />
+                        <TextField fx:id="erabiltzailea" layoutX="237.0" layoutY="50.0" prefHeight="26.0" prefWidth="319.0" />
+                        <Label layoutX="155.0" layoutY="93.0" text="Pasahitza:" />
+                        <TextField fx:id="pasahitza" layoutX="237.0" layoutY="89.0" prefHeight="26.0" prefWidth="319.0" />
+                        <Button id="eskaner" fx:id="eskaneatu_button_2" layoutX="415.0" layoutY="342.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="94.0" text="Eskaneatu" />
+                        <Button id="garbitu" fx:id="garbitu_button_2" layoutX="284.0" layoutY="342.0" mnemonicParsing="false" onAction="#onClick" prefHeight="32.0" prefWidth="94.0" text="Garbitu" />
                   </children>
               </AnchorPane>
             </content>

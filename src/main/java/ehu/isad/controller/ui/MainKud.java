@@ -2,6 +2,7 @@ package ehu.isad.controller.ui;
 
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import ehu.isad.Main;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -54,14 +55,14 @@ public class MainKud implements Initializable {
 
 
 
-//  @FXML
-//  private CMSKud cmsController;
-//
-//  @FXML
-//  private WhatWebKud whatwebController;
-//
-//  @FXML
-//  private ZerbitzariakKud zerbitzariakController;
+  @FXML
+  private CMSKud cmsController;
+
+  @FXML
+  private WhatWebKud whatwebController;
+
+  @FXML
+  private ZerbitzariakKud zerbitzariakController;
 
 
 
@@ -83,14 +84,19 @@ public class MainKud implements Initializable {
     }
   }
   public void aldatu_lehioa (int index){
+    PseudoClass aukeratua = PseudoClass.getPseudoClass("aukeratua");
+
     if (index == 2) {
+      izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(33,132,154),CornerRadii.EMPTY,Insets.EMPTY)));
       cms_button.setEffect(new Blend());
-      izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(0 ,94,126),CornerRadii.EMPTY,Insets.EMPTY)));
       titulua.setText("WHATWEB");
       azpititulua.setText("Web orrialdeak eskanerra");
       whatWeb_button.toFront();
       Zerbitzariak.toBack();
       Cms.toBack();
+      whatWeb_button.pseudoClassStateChanged(aukeratua,true);
+      cms_button.pseudoClassStateChanged(aukeratua,false);
+      zerbitzari_button.pseudoClassStateChanged(aukeratua,false);
     }else
     if (index == 1) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.rgb(156,156,156), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -99,32 +105,38 @@ public class MainKud implements Initializable {
       azpititulua.setText("Kontsultatu diren zerbitzarien zerrenda");
       this.main.zerbitzariakBerriztatu();
       Zerbitzariak.toFront();
+      zerbitzariakController.eguneratu();
       Cms.toBack();
       WhatWeb.toBack();
+      zerbitzari_button.pseudoClassStateChanged(aukeratua,true);
+      cms_button.pseudoClassStateChanged(aukeratua,false);
+      whatWeb_button.pseudoClassStateChanged(aukeratua,false);
     }else
     if (index == 0) {
       izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
-      cms_button.setEffect(new Blend());
       titulua.setText("CMS");
       azpititulua.setText("WordPress, Joomla, PhpMyAdmin, Drupal");
       Cms.toFront();
       WhatWeb.toBack();
       Zerbitzariak.toBack();
+      cms_button.pseudoClassStateChanged(aukeratua,true);
+      zerbitzari_button.pseudoClassStateChanged(aukeratua,false);
+      whatWeb_button.pseudoClassStateChanged(aukeratua,false);
     }
   }
-  public void hasieraketak_egin(){
-    titulua.setText("CMS");
-    azpititulua.setText("WordPress, Joomla, PhpMyAdmin, Drupal");
-    izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
-    cms_button.setEffect(new Blend(BlendMode.ADD));
 
-  }
+
   @FXML
   void handleClose(MouseEvent event) {
     System.exit(0);
   }
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+    PseudoClass aukeratua = PseudoClass.getPseudoClass("aukeratua");
 
+    titulua.setText("CMS");
+    azpititulua.setText("WordPress, Joomla, PhpMyAdmin, Drupal");
+    izen_panela.setBackground(new Background(new BackgroundFill(Color.MEDIUMPURPLE, CornerRadii.EMPTY, Insets.EMPTY)));
+    cms_button.pseudoClassStateChanged(aukeratua,true);
   }
 }

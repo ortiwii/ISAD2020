@@ -8,5 +8,6 @@ open module javafx {
   requires sqlite.jdbc;
   requires org.apache.commons.io;
     requires java.desktop;
-    exports ehu.isad;
+  exports ehu.isad;
+
 }

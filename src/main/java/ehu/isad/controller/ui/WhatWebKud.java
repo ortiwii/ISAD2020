@@ -32,6 +32,7 @@ public class WhatWebKud implements Initializable {
 
     @FXML
     private Button garbitu_button_1;
+
     @FXML
     private TextField url_txt_2;
 
@@ -41,6 +42,15 @@ public class WhatWebKud implements Initializable {
     @FXML
     private Button eskaneatu_button_2;
 
+    @FXML
+    private TextField erabiltzailea;
+
+    @FXML
+    private TextField pasahitza;
+
+    @FXML
+    private Button garbitu_button_2;
+
     public WhatWebKud(Main main) {
         this.main = main;
     }
@@ -48,16 +58,20 @@ public class WhatWebKud implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 
     @FXML
     void onClick(ActionEvent event) {
         if (event.getSource() == eskaneatu_button_1){
             this.bilatu();
+        }else if (event.getSource() == eskaneatu_button_2){
+            //this.bilatuMongo();
         }else if (event.getSource() == garbitu_button_1){
-            this.garbitu();
+            this.garbitu_1();
+        }else if (event.getSource() == garbitu_button_2){
+            this.garbitu_2();
         }
+
     }
     @FXML
     void keyPressed(KeyEvent event) {
@@ -92,8 +106,15 @@ public class WhatWebKud implements Initializable {
         });
         thread.start();
     }
-    private void garbitu (){
+    private void garbitu_1 (){
         this.log_txt_1.setText("");
         this.url_txt_1.setText("");
+    }
+    private void garbitu_2(){
+        url_txt_2.setText("");
+        log_txt_2.setText("");
+        erabiltzailea.setText("");
+        pasahitza.setText("");
+
     }
 }

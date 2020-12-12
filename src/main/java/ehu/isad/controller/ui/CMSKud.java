@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import ehu.isad.CMSTaulaModel;
 import ehu.isad.Main;
 
 import ehu.isad.CMSTaulaModel;
@@ -14,6 +15,8 @@ import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
+import javafx.css.StyleClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -25,6 +28,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class CMSKud {
 
@@ -69,10 +77,19 @@ public class CMSKud {
         this.main = main;
     }
 
+    public void zerrendaKargatu(){
+        List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak("", "");
+        taulaModels.setAll(aukerak);
+        tbData.refresh();
+    }
+
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
             this.bilatu();
+            List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
+            taulaModels.setAll(aukerak);
+            tbData.refresh();
         }
     }
     @FXML
@@ -92,31 +109,49 @@ public class CMSKud {
 
         List<String> list = WhatWebDBKud.getInstance().getCMS();
         ObservableList<String> cms = FXCollections.observableArrayList(list);
-        this.cbox.setItems(cms);
+        cbox.setItems(cms);
 
         tbData.setEditable(false);
 
         urlColumn.setCellValueFactory(new PropertyValueFactory<>("Url"));
-         cmsColumn.setCellValueFactory(new PropertyValueFactory<>("Cms"));
+        cmsColumn.setCellValueFactory(new PropertyValueFactory<>("Cms"));
         versionColumn.setCellValueFactory(new PropertyValueFactory<>("Version"));
         lastUpdatedColumn.setCellValueFactory(new PropertyValueFactory<>("Date"));
 
+        tbData.setItems(taulaModels);
+        addButtonToTable();
+        zerrendaKargatu();
         tbData.setItems(this.taulaModels);
         this.addButtonToTable();
 
         this.bilatu();
     }
+
+    public void eguneratuTaula(){
+        WhatWebDBKud.getInstance().getCMS();
+        List<String> list = WhatWebDBKud.getInstance().getCMS();
+    }
+
     private void addButtonToTable() {
         TableColumn<CMSTaulaModel, Void> colBtn = new TableColumn("Irudiak");
 
         Callback<TableColumn<CMSTaulaModel, Void>, TableCell<CMSTaulaModel, Void>> cellFactory = new Callback<TableColumn<CMSTaulaModel, Void>, TableCell<CMSTaulaModel, Void>>() {
             @Override
             public TableCell<CMSTaulaModel, Void> call(final TableColumn<CMSTaulaModel, Void> param) {
+                PseudoClass botoia=PseudoClass.getPseudoClass("default");
                 final TableCell<CMSTaulaModel, Void> cell = new TableCell<CMSTaulaModel, Void>() {
 
                     private final Button btn = new Button("Web Orria");
 
                     {
+//                        Zerrendako Button guztien CSS estiloak aplikatzen dira
+
+                        btn.setStyle("-fx-background-color: #9370db;" +
+                                "-fx-text-fill: #FFFFFF;" +
+                                "-fx-background-radius: 0;" +
+                                "-fx-max-width: 200;" +
+                                "-fx-padding: 5");
+
                         btn.setOnAction((ActionEvent event) -> {
 
                             Thread thread = new Thread(() -> {
