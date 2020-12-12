@@ -7,16 +7,14 @@
     -fx-font-family: Arial;
     -fx-font-size: 18;
     -fx-background-radius: 0;
-
     -fx-background-color: rgb(33, 132, 154);
-
 }
 
 .tab:selected {
-    /*-fx-background-color: #3F2863;*/
     -fx-font-weight: bold;
-    -fx-background-color: #34c9ee;
-
+    /*-fx-background-color: #34c9ee;*/
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-color: #FC6F03, #34c9ee;
 }
 
 
@@ -27,14 +25,19 @@
     -fx-background-color : #3f2863;
     -fx-text-fill: #FFFFFF;
 }
+.button:hover{
+    -fx-cursor: hand;
+}
+#web{
+    -fx-max-width: 100%;
+    -fx-background-color: #9370db;
+    -fx-text-fill: #FFFFFF;
+}
 #garbitu{
     -fx-background-color: rgb(252, 111, 3);
 }
 #eskaner{
     -fx-background-color: rgb(33, 132, 154);
-}
-.button:hover{
-    -fx-cursor: hand;
 }
 
 
