@@ -23,7 +23,7 @@ public class DBKudeatzaile {
 			DriverManager.registerDriver(new org.sqlite.JDBC());
 			conn = DriverManager.getConnection(url);
 
-			System.out.println("Database connection established");
+			System.out.println("Database connection established, "+dbpath);
 		} catch (Exception e) {
 			System.err.println("Cannot connect to database server " + e);
 		}
