@@ -45,9 +45,7 @@ dependencies {
     // https://mvnrepository.com/artifact/commons-io/commons-io
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 
-
-//    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-//    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
+    compile 'org.mongodb:mongo-java-driver:3.8.1'
 
 }
 dependencies {
@@ -61,7 +59,7 @@ def newArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED', '--ad
 
 jlink {
 
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    options = ['--verbose', '--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
     launcher {
         name = 'whatwebfx'
         jvmArgs = [ '--add-exports','java.desktop/com.apple.eawt=ALL-UNNAMED',
@@ -75,7 +73,7 @@ jlink {
         } else if (javafx.getPlatform().name() == "WINDOWS") {
             installerType = "exe"
             jpackageHome = "C:\\Users\\Gorka\\.jdks\\openjdk-14.0.2"
-            installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
+            installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser', '--win-shortcut']
         }
     }
 }
