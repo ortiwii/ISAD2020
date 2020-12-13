@@ -65,7 +65,7 @@ public class WhatWebKud implements Initializable {
         if (event.getSource() == eskaneatu_button_1){
             this.bilatu();
         }else if (event.getSource() == eskaneatu_button_2){
-            //this.bilatuMongo();
+            this.bilatuMongo();
         }else if (event.getSource() == garbitu_button_1){
             this.garbitu_1();
         }else if (event.getSource() == garbitu_button_2){
@@ -76,8 +76,41 @@ public class WhatWebKud implements Initializable {
     @FXML
     void keyPressed(KeyEvent event) {
         if (event.getCode() == KeyCode.ENTER){
-            this.bilatu();
+           this.bilatu();
         }
+    }
+
+
+    @FXML
+    void keyPressedMongo(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER){
+            this.bilatuMongo();
+        }
+    }
+    private void bilatuMongo(){
+        log_txt_2.setWrapText(true);
+        log_txt_2.setText("WhatWeb Mongo kargatzen itxaron mesedez ........");
+       //
+        Thread thread = new Thread(() -> {
+
+            this.main.aldatuArratoia(Cursor.WAIT);
+            this.url_txt_2.setEditable(false);
+            String newLine = System.getProperty("line.separator");
+            final StringBuilder emaitza = new StringBuilder();
+            String url = url_txt_2.getText();
+
+            SystemConection.getInstance().execWhatWebMongo(url).forEach(line -> {
+                emaitza.append(line + newLine);
+            });
+            Platform.runLater(() -> {
+                log_txt_2.setText(emaitza.toString());
+                url_txt_2.setText(url);
+                this.main.aldatuArratoia(Cursor.DEFAULT);
+                this.url_txt_2.setEditable(true);
+
+            });
+        });
+        thread.start();
     }
     private void bilatu (){
         log_txt_1.setWrapText(true);

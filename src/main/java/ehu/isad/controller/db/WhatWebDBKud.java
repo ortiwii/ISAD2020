@@ -4,14 +4,15 @@ package ehu.isad.controller.db;
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.Services.SystemConection;
-import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class WhatWebDBKud {
     private static WhatWebDBKud instantzia = new WhatWebDBKud();

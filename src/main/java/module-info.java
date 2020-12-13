@@ -9,7 +9,7 @@ open module javafx {
   requires java.desktop;
   requires sqlite.jdbc;
   requires mongo.java.driver;
-  requires org.mongodb.driver.core;
+
 
   exports ehu.isad;
 }

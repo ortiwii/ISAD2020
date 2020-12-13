@@ -3,9 +3,10 @@ package ehu.isad.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.scene.image.Image;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -30,6 +31,7 @@ public class Services {
             properties = new Properties();
             properties.load(in);
             if (System.getProperty("os.name").toLowerCase().contains("win")) { //windows-en dago
+                System.out.println("Se ha metido aqui");
                 path = properties.getProperty("pathToInsertWin");
             }else{ //Ubuntun dago
                 path = properties.getProperty("pathToInsertUbu");

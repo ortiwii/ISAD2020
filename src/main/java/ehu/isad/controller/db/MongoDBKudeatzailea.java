@@ -6,13 +6,26 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class MongoDBKudeatzailea {
 
-    public static void main(String[] args) {
+    private static MongoDBKudeatzailea instantzia = new MongoDBKudeatzailea();
 
-        try (MongoClient client = new MongoClient("localhost", 27017)) {
+    public static MongoDBKudeatzailea getInstantzia() {
+
+        return instantzia;
+    }
+
+    private MongoDBKudeatzailea() {
+
+    }
+
+    public List<String> getZerbitzariak() {
+        List<String> emaitza = new ArrayList<>();
+        try (MongoClient client = new MongoClient("192.168.0.27", 27017)) {
 
             MongoDatabase database = client.getDatabase("whatweb");
             MongoCollection<Document> collection = database.getCollection("whatweb");
@@ -23,22 +36,26 @@ public class MongoDBKudeatzailea {
 
             Document projection = new Document();
 
-            projection.append("target", "$target");
-            projection.append("plugins.Joomla", "$plugins.Joomla");
-            projection.append("_id", 0);
+            query.append("http_status", 200L);
 
+            projection.append("target", "$target");
+            projection.append("_id", 0);
             Consumer<Document> processBlock = new Consumer<Document>() {
                 @Override
                 public void accept(Document document) {
-                    System.out.println(document);
+                    emaitza.add((String) document.get("target"));
+                    System.out.println(document.get("target"));
                 }
             };
 
             collection.find(query).projection(projection).forEach(processBlock);
 
+
         } catch (MongoException e) {
             // handle MongoDB exception
         }
+        return emaitza;
     }
-
 }
+
+

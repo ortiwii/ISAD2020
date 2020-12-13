@@ -1,17 +1,16 @@
 package ehu.isad.controller.ui;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
-
 import ehu.isad.Main;
+import ehu.isad.controller.db.MongoDBKudeatzailea;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+
+import java.net.URL;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class ZerbitzariakKud {
 
@@ -40,7 +39,9 @@ public class ZerbitzariakKud {
 
     public void eguneratu(){
         List<String> list = WhatWebDBKud.getInstance().getBilaketak();
+        List<String> list_mongo= MongoDBKudeatzailea.getInstantzia().getZerbitzariak();
         targets.setAll(list);
+        targets.addAll(list_mongo);
         web_zerrenda.setItems(targets);
     }
 }
