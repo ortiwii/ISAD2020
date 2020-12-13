@@ -9,6 +9,7 @@ open module javafx {
   requires java.desktop;
   requires sqlite.jdbc;
   requires mongo.java.driver;
+  requires org.apache.commons.io;
 
 
   exports ehu.isad;

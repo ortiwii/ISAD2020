@@ -49,8 +49,6 @@ dependencies {
 //    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
 //    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 
-//     https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
-//    compile group: 'org.xerial', name: 'sqlite-jdbc', version: '3.28.0'
 }
 
 dependencies {
@@ -82,7 +80,7 @@ jlink {
             jpackageHome = "/Users/<user>/Downloads/jdk-13.jdk/Contents/Home"
         } else if (javafx.getPlatform().name() == "WINDOWS") {
             installerType = "exe"
-            jpackageHome = "C:\\Users\\Gorka\\.jdks\\openjdk-14.0.2"
+            jpackageHome = "C:\\Users\\Alonso\\.jdks\\openjdk-14.0.2"
             installerOptions = ['--win-menu', '--win-shortcut', '--win-dir-chooser']
         }
     }
