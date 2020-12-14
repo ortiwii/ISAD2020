@@ -23,7 +23,8 @@ public class WhatWebDBKud {
         return instantzia;
     }
 
-    public void txertatu(String target){
+    public boolean txertatu(String target){
+        boolean flag = false;
         if (WhatWebDBKud.getInstance().bilatutaDago(target)) {
             this.ezabatu(target);
         }
@@ -31,18 +32,26 @@ public class WhatWebDBKud {
         try {
             String path = Services.getInstance().getPathToInsert();
             File insert = new File(path);
-
-            Scanner sc = new Scanner(insert);
-            while (sc.hasNextLine()){
-                String line = sc.nextLine();
-                line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
-                DBKudeatzaile.getInstantzia().execSQL(line);
+            if (insert.exists()) {
+                Scanner sc = new Scanner(insert);
+                int i = 0;
+                while (sc.hasNextLine()) {
+                    String line = sc.nextLine();
+                    line = line.replace("INSERT IGNORE INTO", "INSERT OR IGNORE INTO");
+                    DBKudeatzaile.getInstantzia().execSQL(line);
+                    i ++;
+                }
+                if (i < 2){
+                    flag = false;
+                }else{
+                    flag = true;
+                }
+                SystemConection.getInstance().deleteFile();
             }
-            SystemConection.getInstance().deleteFile();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return flag;
     }
     public void ezabatu (String target){
 

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,6 +36,7 @@ public class Main extends Application {
     stage = primaryStage;
     pantailakKargatu();
     stage.initStyle(StageStyle.UNDECORATED);
+    stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/java.png")));
 
     mainUI.setOnMousePressed(new EventHandler<MouseEvent>() {
       @Override

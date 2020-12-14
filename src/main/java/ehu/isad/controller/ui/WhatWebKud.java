@@ -129,9 +129,13 @@ public class WhatWebKud implements Initializable {
             });
 
             Platform.runLater(() -> {
-                log_txt_1.setText(emaitza.toString());
+                boolean flag = WhatWebDBKud.getInstance().txertatu(url);
+                if (flag){
+                    log_txt_1.setText(emaitza.toString());
+                }else{
+                    log_txt_1.setText("EZ DUZU URL ONDO SARTU !");
+                }
                 url_txt_1.setText(url);
-                WhatWebDBKud.getInstance().txertatu(url);
                 this.main.aldatuArratoia(Cursor.DEFAULT);
                 this.url_txt_1.setEditable(true);
 

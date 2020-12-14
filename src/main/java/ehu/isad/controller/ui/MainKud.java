@@ -66,11 +66,6 @@ public class MainKud implements Initializable {
 
 
 
-
-//  public void setMainApp(Main main) {
-//    this.mainApp = mainApp;
-//  }
-
   @FXML
   void onClick(ActionEvent event) {
     if (event.getSource().equals(whatWeb_button)) {
