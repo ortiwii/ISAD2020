@@ -1,13 +1,22 @@
 package ehu.isad.controller.ui;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ResourceBundle;
+
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Main;
+
+import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
+import javafx.css.StyleClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -22,7 +31,6 @@ import javafx.util.Callback;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -70,22 +78,17 @@ public class CMSKud {
     }
 
     public void zerrendaKargatu(){
-        List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak("", "");
-        taulaModels.setAll(aukerak);
-        tbData.refresh();
+        this.bilatu();
     }
 
     @FXML
     void keyPressed(KeyEvent event) {
         int code = event.getCode().getCode();
         if ( (code >= 48 && code <= 57) || ( code >= 65 && code <= 90) || (code >= 97 && code <= 122) ) {
-                // Number                     // Alphabet upper case          // Alphabet lower case
+            // Number                     // Alphabet upper case          // Alphabet lower case
             this.bilatu();
         }else if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DELETE || event.getCode() == KeyCode.BACK_SPACE){
             this.bilatu();
-            List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
-            taulaModels.setAll(aukerak);
-            tbData.refresh();
         }
     }
     @FXML
@@ -118,15 +121,8 @@ public class CMSKud {
 
         tbData.setItems(this.taulaModels);
         this.addButtonToTable();
-        tbData.setItems(taulaModels);
-        zerrendaKargatu();
         this.bilatu();
     }
-
-//    public void eguneratuTaula(){
-//        WhatWebDBKud.getInstance().getCMS();
-//        List<String> list = WhatWebDBKud.getInstance().getCMS();
-//    }
 
     private void addButtonToTable() {
         TableColumn<CMSTaulaModel, Void> colBtn = new TableColumn("Irudiak");
