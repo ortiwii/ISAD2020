@@ -43,7 +43,6 @@ public class Services {
     public Image getURLImage(String url) {
 
         String path = WhatWebDBKud.getInstance().getIrudiPath(url);
-        System.out.println(path);
 
         if (path == ""){
             URL con = null;

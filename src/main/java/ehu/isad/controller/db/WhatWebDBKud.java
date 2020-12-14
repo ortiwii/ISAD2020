@@ -4,7 +4,6 @@ package ehu.isad.controller.db;
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.Services.SystemConection;
-import javafx.scene.control.Button;
 
 import java.io.File;
 import java.io.IOException;
@@ -94,21 +93,16 @@ public class WhatWebDBKud {
         List<CMSTaulaModel>emaitza = new ArrayList<>();
 
         if( (url == null || url.equals("")) && (cms == null || cms.equals("")) ){ //Bi aldagaiak hutsik
-            System.out.println("1, "+url+", "+cms);
             query = "SELECT DISTINCT T.target, c.name, 0 as version, T.date FROM targets T, Scans S, completeCMS c WHERE T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name LIKE '%unknown%' AND T.status LIKE 200\n" +
                     "union\n" +
                     "SELECT DISTINCT T.target, c.name, S.version,T.date FROM targets T, Scans S, completeCMS c WHERE T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name NOT LIKE '%unknown%' AND T.status LIKE 200";
-
         }else if ( url == null || url.equals("") ){ // url hutsik baina cms ez hutsik
-            System.out.println("2, "+url+", "+cms);
             query = "SELECT DISTINCT T.target, c.name, T.date, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND T.status LIKE 200;" ;
         }else if ( cms == null || cms.equals("") ){ // url beteta baina cms hutsik
-            System.out.println("3, "+url+", "+cms);
             query = "SELECT DISTINCT T.target, c.name, 0 as version, T.date FROM targets T, Scans S, completeCMS c WHERE T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name LIKE '%unknown%' AND T.status LIKE 200\n" +
                     "union\n" +
                     "SELECT DISTINCT T.target, c.name, S.version,T.date FROM targets T, Scans S, completeCMS c WHERE T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND c.name NOT LIKE '%unknown%' AND T.status LIKE 200";
         }else{ //Bi aldagaiak beteta
-            System.out.println("4, "+url+", "+cms);
             query = "SELECT DISTINCT T.target, c.name, T.date, S.version FROM targets T, Scans S, completeCMS c WHERE c.name LIKE '%"+cms+"%' AND T.target LIKE '%"+url+"%' AND T.target_id = S.target_id AND S.plugin_id = c.plugin_id AND T.status LIKE 200";
         }
 

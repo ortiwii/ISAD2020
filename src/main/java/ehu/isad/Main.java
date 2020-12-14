@@ -62,12 +62,6 @@ public class Main extends Application {
   }
   private void pantailakKargatu() throws IOException {
 
-//    FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
-//    mainUI = (Parent) loaderMain.load();
-//    mainKud = loaderMain.getController();
-//    mainScene = new Scene(mainUI);
-//
-//    mainKud.setMainApp(this);
 
 
       FXMLLoader loaderMain = new FXMLLoader(getClass().getResource("/Main.fxml"));
@@ -92,7 +86,7 @@ public class Main extends Application {
                   return type.newInstance();
               } catch (Exception exc) {
                   exc.printStackTrace();
-                  throw new RuntimeException(exc); // fatal, just bail...
+                  throw new RuntimeException(exc);
               }
           }
       };
@@ -116,8 +110,4 @@ public class Main extends Application {
     launch(args);
   }
 
-//  public void mainErakutsi() {
-//    stage.setScene(new Scene(mainUI));
-//    stage.show();
-//  }
 }

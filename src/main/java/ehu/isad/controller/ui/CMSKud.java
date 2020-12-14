@@ -9,14 +9,12 @@ import java.util.ResourceBundle;
 import ehu.isad.CMSTaulaModel;
 import ehu.isad.Main;
 
-import ehu.isad.CMSTaulaModel;
 import ehu.isad.Services.Services;
 import ehu.isad.controller.db.WhatWebDBKud;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.css.PseudoClass;
-import javafx.css.StyleClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -29,10 +27,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class CMSKud {
 
@@ -76,14 +70,13 @@ public class CMSKud {
     public CMSKud(Main main) {
         this.main = main;
     }
-
-    public void zerrendaKargatu(){
-        this.bilatu();
-    }
-
     @FXML
     void keyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER){
+        int code = event.getCode().getCode();
+        if ( (code >= 48 && code <= 57) || ( code >= 65 && code <= 90) || (code >= 97 && code <= 122) ) {
+            // Number                     // Alphabet upper case          // Alphabet lower case
+            this.bilatu();
+        }else if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DELETE || event.getCode() == KeyCode.BACK_SPACE){
             this.bilatu();
         }
     }
@@ -97,6 +90,8 @@ public class CMSKud {
     void onClick(ActionEvent event) {
         if (event.getSource() == addUrlButton){
             this.aldatuWhatWebPantailara();
+        }else if (event.getSource() == cbox){
+            this.bilatu();
         }
     }
     @FXML

@@ -102,7 +102,6 @@ public class DBKudeatzaile {
 			} else {
 				// update, delete, create agindu bat
 				count = s.executeUpdate(query);
-				System.out.println(count + " rows affected");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
