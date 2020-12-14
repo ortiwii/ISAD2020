@@ -1,5 +1,5 @@
 # ISAD2020
-![Cuarenteam](cuarenteam.png)
+![Cuarenteam](logo.png)
 <br>
 <br>
 Gorka Ortiz<br>
