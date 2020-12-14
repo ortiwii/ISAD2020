@@ -123,10 +123,10 @@ public class CMSKud {
         this.bilatu();
     }
 
-    public void eguneratuTaula(){
-        WhatWebDBKud.getInstance().getCMS();
-        List<String> list = WhatWebDBKud.getInstance().getCMS();
-    }
+//    public void eguneratuTaula(){
+//        WhatWebDBKud.getInstance().getCMS();
+//        List<String> list = WhatWebDBKud.getInstance().getCMS();
+//    }
 
     private void addButtonToTable() {
         TableColumn<CMSTaulaModel, Void> colBtn = new TableColumn("Irudiak");
