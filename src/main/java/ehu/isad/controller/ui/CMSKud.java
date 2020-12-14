@@ -77,7 +77,11 @@ public class CMSKud {
 
     @FXML
     void keyPressed(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER){
+        int code = event.getCode().getCode();
+        if ( (code >= 48 && code <= 57) || ( code >= 65 && code <= 90) || (code >= 97 && code <= 122) ) {
+                // Number                     // Alphabet upper case          // Alphabet lower case
+            this.bilatu();
+        }else if (event.getCode() == KeyCode.ENTER || event.getCode() == KeyCode.DELETE || event.getCode() == KeyCode.BACK_SPACE){
             this.bilatu();
             List<CMSTaulaModel> aukerak = WhatWebDBKud.getInstance().getAukerak(this.urlArea.getText(), this.cbox.getValue());
             taulaModels.setAll(aukerak);
@@ -94,6 +98,8 @@ public class CMSKud {
     void onClick(ActionEvent event) {
         if (event.getSource() == addUrlButton){
             this.aldatuWhatWebPantailara();
+        }else if (event.getSource() == cbox){
+            this.bilatu();
         }
     }
     @FXML

@@ -15,6 +15,32 @@ public class DBKudeatzaile {
 
 	Connection conn = null;
 
+	// singleton patroia
+	private static DBKudeatzaile instantzia = new DBKudeatzaile();
+
+	private DBKudeatzaile()  {
+
+		Properties properties = null;
+		InputStream in = null;
+
+		try {
+			in = this.getClass().getResourceAsStream("/setup.properties");
+			properties = new Properties();
+			properties.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				in.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		this.conOpen(System.getProperty("user.home")+properties.getProperty("dbpath"));
+
+	}
+
 	private void conOpen(String dbpath) {
 		try {
 			this.datubaseInizializazioa();
@@ -56,32 +82,6 @@ public class DBKudeatzaile {
 		}
 
 		return rs;
-	}
-
-	// singleton patroia
-	private static DBKudeatzaile instantzia = new DBKudeatzaile();
-
-	private DBKudeatzaile()  {
-
-		Properties properties = null;
-		InputStream in = null;
-
-		try {
-			in = this.getClass().getResourceAsStream("/setup.properties");
-			properties = new Properties();
-			properties.load(in);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				in.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		this.conOpen(System.getProperty("user.home")+properties.getProperty("dbpath"));
-
 	}
 
 	public static DBKudeatzaile getInstantzia() {

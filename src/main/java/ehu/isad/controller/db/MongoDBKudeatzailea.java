@@ -24,13 +24,12 @@ public class MongoDBKudeatzailea {
     }
 
     public List<String> getZerbitzariak() {
+
         List<String> emaitza = new ArrayList<>();
-        try (MongoClient client = new MongoClient("192.168.0.27", 27017)) {
+        try (MongoClient client = new MongoClient("18.234.53.252", 27017)) {
 
             MongoDatabase database = client.getDatabase("whatweb");
             MongoCollection<Document> collection = database.getCollection("whatweb");
-
-            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
 
             Document query = new Document();
 
@@ -52,7 +51,7 @@ public class MongoDBKudeatzailea {
 
 
         } catch (MongoException e) {
-            // handle MongoDB exception
+            e.printStackTrace();
         }
         return emaitza;
     }
