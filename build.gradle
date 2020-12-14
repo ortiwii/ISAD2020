@@ -48,9 +48,15 @@ dependencies {
     compile 'org.mongodb:mongo-java-driver:3.8.1'
 
 }
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 }
+
+dependencies {
+    compile 'org.mongodb:mongo-java-driver:3.8.1'
+}
+
 repositories {
     mavenCentral()
 }
