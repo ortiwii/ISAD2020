@@ -30,7 +30,7 @@
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                      <children>
                         <FontAwesomeIconView glyphName="SEARCH" size="20.0" wrappingWidth="21.142857551574707" />
-                        <TextField fx:id="urlArea" onKeyPressed="#keyPressed" prefHeight="35.0" prefWidth="465.0" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="urlArea" onKeyReleased="#keyPressed" prefHeight="35.0" prefWidth="465.0" HBox.hgrow="ALWAYS" />
                         <ComboBox fx:id="cbox" onAction="#onClick" onKeyPressed="#suprPressed" prefHeight="35.0" prefWidth="115.0" />
                         <Button fx:id="addUrlButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#onClick" prefHeight="26.0" prefWidth="133.0" stylesheets="@fullpackstyling.css" text="Add URL" textFill="WHITE" HBox.hgrow="ALWAYS">
                            <graphic>

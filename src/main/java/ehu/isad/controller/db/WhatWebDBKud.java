@@ -48,6 +48,7 @@ public class WhatWebDBKud {
             }
         } catch (IOException e) {
             e.printStackTrace();
+            flag = false;
         }
         return flag;
     }
